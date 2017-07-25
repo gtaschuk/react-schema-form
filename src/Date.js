@@ -34,6 +34,7 @@ class Date extends React.Component {
                     onChange={this.onDatePicked}
                     onShow={null}
                     onDismiss={null}
+                    value={this.props.value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}/>
 
