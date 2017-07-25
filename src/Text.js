@@ -6,6 +6,20 @@ import ComposedComponent from './ComposedComponent';
 import TextField from 'material-ui/TextField';
 
 class Text extends React.Component {
+    constructor(props) {
+      super();
+      this.state = {
+        value: props.defaultValue
+      };
+    }
+
+    componentWillReceiveProps(nextProps) {
+      var key = this.props.form.key[0];
+      this.setState({
+        value: nextProps.model[key]
+      })
+    }
+
     render() {
         //console.log('Text props', this.props.form.readonly);
         return (
@@ -16,7 +30,7 @@ class Text extends React.Component {
                     hintText={this.props.form.placeholder}
                     errorText={this.props.error}
                     onChange={this.props.onChangeValidate}
-                    value={this.props.value}
+                    value={this.state.value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}} />
             </div>
