@@ -6,6 +6,16 @@ import ComposedComponent from './ComposedComponent';
 import TextField from 'material-ui/TextField';
 
 class TextArea extends React.Component {
+    constructor(props) {
+      super();
+      this.state = {value: props.value};
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        value: nextProps.model[this.props.form.key]
+      })
+    }
 
     render() {
         // FIXME: Obviously fix rowsMax eventually..
@@ -18,7 +28,7 @@ class TextArea extends React.Component {
                     hintText={this.props.form.placeholder}
                     onChange={this.props.onChangeValidate}
                     errorText={this.props.error}
-                    value={this.props.value}
+                    value={this.state.value}
                     multiLine={true}
                     rows={this.props.form.rows}
                     rowsMax={this.props.form.rowsMax}

@@ -15,9 +15,16 @@ class Date extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {value: props.defaultValue};
         this.onDatePicked = this.onDatePicked.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+      var key = this.props.form.key[0];
+      this.setState({
+        value: nextProps.model[key]
+      })
+    }
 
     onDatePicked(empty, date) {
         this.props.onChangeValidate(date);
@@ -34,7 +41,7 @@ class Date extends React.Component {
                     onChange={this.onDatePicked}
                     onShow={null}
                     onDismiss={null}
-                    value={this.props.value}
+                    value={this.state.value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}/>
 

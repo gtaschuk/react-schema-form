@@ -8,16 +8,18 @@ import TextField from 'material-ui/TextField';
 class Text extends React.Component {
     constructor(props) {
       super();
-      this.state = {
-        value: props.defaultValue
-      };
+      this.state = {value: props.value};
     }
 
     componentWillReceiveProps(nextProps) {
-      var key = this.props.form.key[0];
-      this.setState({
-        value: nextProps.model[key]
-      })
+      if(typeof nextProps.model != "undefined") {
+        console.log(nextProps);
+        var newValue = nextProps.model[this.props.form.key];
+        this.setState({
+          value: newValue
+        })
+        //this.refs.textField.value = newValue;
+      }
     }
 
     render() {

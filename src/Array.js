@@ -31,6 +31,13 @@ class Array extends React.Component {
         //console.log('constructor', this.props.form.key, this.props.model, this.state.model);
     }
 
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        model: utils.selectOrSet(this.props.form.key, nextProps.model)
+      });
+      console.log("CWRP", nextProps.model[this.props.form.key]);
+    }
+
     componentDidMount() {
         // Always start with one empty form unless configured otherwise.
         if(this.props.form.startEmpty !== true && this.state.model.length === 0) {
@@ -98,6 +105,7 @@ class Array extends React.Component {
 
     setIndex(index) {
         return function(form) {
+          console.log("setting index", form.key, index);
             if (form.key) {
                 form.key[form.key.indexOf('')] = index;
             }
@@ -105,33 +113,39 @@ class Array extends React.Component {
     };
 
     copyWithIndex(form, index) {
+      //console.log("form", form);
         var copy = _.cloneDeep(form);
         copy.arrayIndex = index;
         utils.traverseForm(copy, this.setIndex(index));
         return copy;
     };
 
+    itemField(i){
+      return function(item, index) {
+        var copy = this.copyWithIndex(item, i);
+        return this.props.builder(copy, this.state.model, index, this.props.onChange, this.props.mapper, this.props.builder);
+      }
+    };
+
+    itemFields (item, i) {
+        //for(var i = 0; i < model.length; i++ ) {
+        let boundOnDelete = this.onDelete.bind(this, i);
+        let fields = this.props.form.items.map(this.itemField(i).bind(this));
+        //console.log('forms', i, forms);
+        return (
+          <li key={i} className="list-group-item">
+              <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
+              {fields}
+          </li>
+        );
+    };
+
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
-        var arrays = [];
-        var fields = [];
-        var model = this.state.model;
-        var items = this.props.form.items;
+        //var model = this.state.model;
         //console.log('fields', fields);
-        for(var i = 0; i < model.length; i++ ) {
-            let boundOnDelete = this.onDelete.bind(this, i);
-            let forms = this.props.form.items.map(function(form, index){
-                var copy = this.copyWithIndex(form, i);
-                return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
-            }.bind(this));
-            //console.log('forms', i, forms);
-            arrays.push(
-              <li key={i} className="list-group-item">
-                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
-                  {forms}
-              </li>
-            );
-        }
+        var arrays = this.state.model.map(this.itemFields.bind(this));
+
         return (
             <div>
                 <div>

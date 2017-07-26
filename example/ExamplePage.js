@@ -89,6 +89,17 @@ var ExamplePage = React.createClass({
                 model: {},
                 form: data.form
             });
+          var renderContext = this;
+            setTimeout(function() {
+              renderContext.setState({model: {
+                "comments": [{"name": "TEST"}],
+                "environment": "SIT1",
+                "name": "hello",
+                "number": 5.0,
+                "integer": 5,
+                "comment": "Javascript suckz"
+              }});
+            }, 2000)
         }.bind(this));
     },
 

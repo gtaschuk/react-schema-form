@@ -26,6 +26,12 @@ class Select extends React.Component {
         this.props.onChangeValidate(event);
     }
 
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        currentValue: nextProps.model[this.props.form.key]
+      })
+    }
+
     render() {
         const menuItems = this.props.form.titleMap.map((item, idx) => (
             <MenuItem key={idx}
