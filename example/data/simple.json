@@ -8,6 +8,18 @@
         "type": "string",
         "default": "Steve"
       },
+      "age":  {
+        "title": "Age",
+        "type": "number"
+      },
+      "birthday":  {
+        "title": "Birthday",
+        "type": "date"
+      },
+      "employed": {
+        "title": "Employed",
+        "type": "boolean"
+      },
       "email":  {
         "title": "Email",
         "type": "string",
@@ -33,18 +45,45 @@
         "maxLength": 20,
         "validationMessage": "Don't be greedy! 20 Characters max please :)",
         "description": "Please write your comment here."
+      },
+      "comments": {
+        "type": "array",
+        "maxItems": 2,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name":  {
+              "title": "Name",
+              "type": "string"
+            }
+          },
+          "required": ["name"]
+        }
       }
     },
     "required": ["name","email","comment"]
   },
   "form": [
     "name",
+    "age",
+    "employed",
+    "birthday",
     "email",
     "environment",
     {
       "key": "comment",
       "type": "textarea",
       "placeholder": "Make a comment"
+    },
+    {
+      "key": "comments",
+      "add": "New",
+      "style": {
+        "add": "btn-success"
+      },
+      "items": [
+        "comments[].name"
+      ]
     }
   ]
 }

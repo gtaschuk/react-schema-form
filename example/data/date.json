@@ -3,10 +3,6 @@
         "type": "object",
         "title": "Types",
         "properties": {
-            "name":  {
-                "type": "string",
-                "minLength": 3
-            },
             "date": {
                 "title": "Date",
                 "type": "date"

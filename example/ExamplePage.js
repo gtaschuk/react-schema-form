@@ -89,6 +89,20 @@ var ExamplePage = React.createClass({
                 model: {},
                 form: data.form
             });
+          var renderContext = this;
+            setTimeout(function() {
+              renderContext.setState({model: {
+                "comments": [{"name": "TEST"}],
+                "environment": "SIT1",
+                "email": "foo@bar.com",
+                "name": "Foo",
+                "number": 5.0,
+                "age": 5,
+                "employed": true,
+                "date": new Date("2017-07-14T04:00:00.000Z"),
+                "comment": "This is a form"
+              }});
+            }, 3000)
         }.bind(this));
     },
 
