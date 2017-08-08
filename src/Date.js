@@ -11,7 +11,7 @@ import DatePicker from 'material-ui/DatePicker/DatePicker';
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class Date extends React.Component {
+class DateField extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,8 +26,12 @@ class Date extends React.Component {
     render() {
         var value = null;
         if (this.props && this.props.value) {
+          if (typeof this.props.value === 'string') {
+            value = new Date(this.props.value);
+          } else {
             value = this.props.value;
-        }
+          }
+        } 
 
         return (
             <div style={{width: '100%', display: 'block'}} className={this.props.form.htmlClass}>
@@ -48,4 +52,4 @@ class Date extends React.Component {
     }
 }
 
-export default ComposedComponent(Date);
+export default ComposedComponent(DateField);
