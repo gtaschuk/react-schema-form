@@ -8,7 +8,7 @@ import Text from './Text';
 import TextArea from './TextArea';
 import Select from './Select';
 import Radios from './Radios';
-import DateField from './Date';
+import DateField from './DateField';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
