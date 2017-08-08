@@ -6,7 +6,7 @@ import utils from './utils';
 import Number from './Number';
 import Text from './Text';
 import TextArea from './TextArea';
-import Select from './Select';
+import SelectField from './SelectField';
 import Radios from './Radios';
 import DateField from './DateField';
 import Checkbox from './Checkbox';

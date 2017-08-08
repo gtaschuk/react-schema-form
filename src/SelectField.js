@@ -4,9 +4,9 @@
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import MaterialUiSelectField from 'material-ui/SelectField';
 
-class Select extends React.Component {
+class SelectField extends React.Component {
 
     constructor(props) {
         super(props);
@@ -44,22 +44,18 @@ class Select extends React.Component {
 
         return (
             <div className={this.props.form.htmlClass}>
-                <SelectField
-                    value={this.state.currentValue}
+                <MaterialUiSelectField
+                    value={this.props.value}
                     floatingLabelText={this.props.form.title}
                     disabled={this.props.form.readonly}
                     onChange={this.onSelected}
                     fullWidth={true} >
 
                     {menuItems}
-                </SelectField>
+                </MaterialUiSelectField>
             </div>
         );
     }
 }
 
-// Select.propTypes = {
-//
-// };
-
-export default ComposedComponent(Select);
+export default ComposedComponent(SelectField);
