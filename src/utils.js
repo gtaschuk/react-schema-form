@@ -106,7 +106,7 @@ var integer = function(name, schema, options) {
 };
 
 var date = function(name, schema, options) {
-    if (stripNullType(schema.type) === 'date') {
+    if (stripNullType(schema.type) === 'date' || stripNullType(schema.type) == 'object') {
         var f = stdFormObj(name, schema, options);
         f.key  = options.path;
         f.type = 'date';
