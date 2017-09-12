@@ -45,7 +45,7 @@ class SelectField extends React.Component {
         return (
             <div className={this.props.form.htmlClass}>
                 <MaterialUiSelectField
-                    value={this.props.value}
+                    value={this.state.currentValue}
                     floatingLabelText={this.props.form.title}
                     disabled={this.props.form.readonly}
                     onChange={this.onSelected}
