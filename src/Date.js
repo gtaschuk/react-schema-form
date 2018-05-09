@@ -1,13 +1,8 @@
-/**
- * Created by steve on 22/12/15.
- */
 import React from 'react';
-var utils = require('./utils');
-var classNames = require('classnames');
 import ComposedComponent from './ComposedComponent';
-import DatePicker from 'material-ui/DatePicker/DatePicker';
 import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
+import TextField from 'material-ui/TextField';
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -33,11 +28,10 @@ class Date extends React.Component {
 
         return (
             <div style={{width: '100%', display: 'block'}} className={this.props.form.htmlClass}>
-                <DatePicker
-                    mode={'landscape'}
-                    autoOk
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.title}
+                <TextField
+                    id="date"
+                    label={this.props.form.title}
+                    type="date"
                     onChange={this.onDatePicked}
                     onShow={null}
                     onDismiss={null}

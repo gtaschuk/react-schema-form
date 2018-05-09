@@ -1,11 +1,7 @@
-/**
- * Created by steve on 15/09/15.
- */
 import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
-import _ from 'lodash';
+import ComposedComponent from './ComposedComponent'
+import { MenuItem } from 'material-ui/Menu';
+import MuiSelect from 'material-ui/Select';
 
 class Select extends React.Component {
 
@@ -54,22 +50,19 @@ class Select extends React.Component {
 
     render() {
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-            <MenuItem key={idx}
-                      primaryText={item.name}
-                      value={item.value} />
+          <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
 
         return (
             <div className={this.props.form.htmlClass}>
-                <SelectField
+                <MuiSelect
                     value={this.state.currentValue}
-                    floatingLabelText={this.props.form.title}
+                    placeholder={this.props.form.title}
                     disabled={this.props.form.readonly}
                     onChange={this.onSelected}
                     fullWidth >
-
                     {menuItems}
-                </SelectField>
+                </MuiSelect>
             </div>
         );
     }
