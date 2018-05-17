@@ -27,7 +27,7 @@ class DateField extends React.Component {
 
         return (
             <div
-                style={{ width: "100%", display: "block" }}
+                style={{ width: '100%', display: 'block' }}
                 className={this.props.form.htmlClass}
             >
                 <TextField

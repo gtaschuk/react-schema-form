@@ -17,7 +17,6 @@ import FieldSet from './FieldSet';
 import _ from 'lodash';
 
 class SchemaForm extends React.Component {
-
     mapper = {
         'number': Number,
         'text': Text,
@@ -84,10 +83,8 @@ class SchemaForm extends React.Component {
 
     render() {
         let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
-
-        //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         let mapper = this.mapper;
-        if(this.props.mapper) {
+        if (this.props.mapper) {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
@@ -96,6 +93,7 @@ class SchemaForm extends React.Component {
 
         return (
             <div style={{width: '100%'}} className={this.props.className ? 'SchemaForm '  + this.props.className : 'SchemaForm'}>{forms}</div>
+
         );
     }
 }
