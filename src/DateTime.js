@@ -1,4 +1,6 @@
 import React from 'react';
+var utils = require('./utils');
+var classNames = require('classnames');
 import ComposedComponent from './ComposedComponent';
 import TextField from '@material-ui/core/TextField';
 
@@ -6,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class DateField extends React.Component {
+class DateTimeField extends React.Component {
     constructor(props) {
         super(props);
         this.onDatePicked = this.onDatePicked.bind(this);
@@ -31,9 +33,10 @@ class DateField extends React.Component {
                 className={this.props.form.htmlClass}
             >
                 <TextField
-                    id="date"
+                    type="datetime-local"
                     label={this.props.form.title}
-                    type="date"
+                    type="datetime-local"
+                    defaultValue="2017-05-24T10:30"
                     onChange={this.onDatePicked}
                     disabled={this.props.form.readonly}
                 />
@@ -42,4 +45,4 @@ class DateField extends React.Component {
     }
 }
 
-export default ComposedComponent(DateField);
+export default ComposedComponent(DateTimeField);
