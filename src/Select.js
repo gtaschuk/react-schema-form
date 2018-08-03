@@ -1,58 +1,47 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiSelect from '@material-ui/core/Select';
 
-class Select extends React.Component {
 
+const getModelValue = (model, {key, titleMap}) => {
+    let result
+    if (Array.isArray(key)) {
+        result = key.reduce((cur, nxt) => cur && cur[nxt], model);
+    } else {
+        result = model[key];
+    }
+    return result || (titleMap != null ? titleMap[0].value : '')
+}
+
+class Select extends Component {
     constructor(props) {
         super(props);
-        this.onSelected = this.onSelected.bind(this);
-
-        const {model, form} = this.props;
-        const {key} = form;
-
-        const storedValue = model && this.getModelKey(model, key) || false;
-        const defaultValue = form.schema.default || false;
-        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
-
-        this.props.setDefault(key, model, form, value)
         this.state = {
-            currentValue: value,
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.model && nextProps.form.key) {
-            this.setState({
-                currentValue: this.getModelKey(nextProps.model, nextProps.form.key)
-                || (nextProps.form.titleMap != null ? nextProps.form.titleMap[0].value : '')
-            });
+            currentValue: getModelValue(this.props.model, this.props.form)
         }
     }
 
-    getModelKey(model, key) {
-        if (Array.isArray(key)) {
-            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
-        } else {
-            return model[key];
+    static getDerivedStateFromProps(props) {
+        if (props.model && props.form.key) {
+            return {
+                currentValue: getModelValue(props.model, props.form)
+            };
         }
     }
 
-    onSelected(event, selectedIndex, menuItem) {
-
+    onSelected = (event) => {
+        let currentValue = event.target.value
         this.setState({
-            currentValue: menuItem
+            currentValue
         });
-        event.target.value = menuItem;
         this.props.onChangeValidate(event);
     }
 
     render() {
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-          <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
+            <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
-
         return (
             <div className={this.props.form.htmlClass}>
                 <MuiSelect
@@ -67,9 +56,5 @@ class Select extends React.Component {
         );
     }
 }
-
-// Select.propTypes = {
-//
-// };
 
 export default ComposedComponent(Select);
