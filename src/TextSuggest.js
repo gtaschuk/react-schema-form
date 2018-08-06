@@ -1,17 +1,13 @@
-/**
- * Created by XaviTorello on 30/05/18
- */
-import React from 'react';
+import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
-import AutoComplete from 'material-ui/AutoComplete';
 
 const dataSourceConfig = {
   text: 'name',
   value: 'value',
 };
 
-class TextSuggest extends React.Component {
-    handleUpdate = (newValue, index) => {
+class TextSuggest extends Component {
+    handleUpdate = (newValue) => {
       const {key} = this.props.form
       const {type} = this.props.form.schema
       return this.props.onChange(key, newValue[dataSourceConfig['value']], type, this.props.form)
@@ -23,19 +19,12 @@ class TextSuggest extends React.Component {
 
         const names = this.props.form.schema.enumNames || this.props.form.schema.enum;
         const values = this.props.form.schema.enum;
-
-        // console.log(names, values);
-        // console.log("indexOf", values.indexOf(init_value));
-        // console.log("names[values.indexOf(init_value)]", names[values.indexOf(init_value)]);
         const init_value_name = names[values.indexOf(init_value)];
-
-        // this.handleUpdate({[dataSourceConfig['value']]: init_value, [dataSourceConfig['text']]: init_value_name})
 
         return init_value_name || init_value.toString()
     }
 
     render() {
-        // console.log('TextSuggest', this.props);
         // assign the filter, by default case insensitive
         const filter = ((filter) => {
             switch (filter) {
@@ -47,8 +36,6 @@ class TextSuggest extends React.Component {
                     break;
             }
         })(this.props.form.filter)
-
-        // console.log("TEXTSUG", this.props);
 
         const value = this.props.value && this.handleInit(this.props.value);
 
@@ -67,8 +54,7 @@ class TextSuggest extends React.Component {
                     dataSource={this.props.form.titleMap || ['Loading...']}
                     filter={filter}
                     maxSearchResults={this.props.form.maxSearchResults || 5}
-                    dataSourceConfig={dataSourceConfig}
-                />
+                    dataSourceConfig={dataSourceConfig}/>
             </div>
         );
     }
