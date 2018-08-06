@@ -1,60 +1,48 @@
-import React, {Component} from 'react';
-import ComposedComponent from './ComposedComponent';
-import {Card, Checkbox, Button} from '@material-ui/core';
+import React, {Component} from 'react'
+import ComposedComponent from './ComposedComponent'
+import {Button} from '@material-ui/core'
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
 class TripleBoolean extends Component {
+
     constructor(props) {
-        super(props);
-        this.state = {
-            yesChecked: false,
-            noChecked: false,
+        super(props)
+
+        const {model, form, value} = this.props
+        const {key} = form
+
+        this.props.setDefault(key, model, form, value)
+    }
+
+    displaySwitch() {
+        let renderBlock = null
+
+        if (this.props.value === 'unanswered') {
+            renderBlock = <div>
+                <Button onClick={(e) => this.props.onChangeValidate(e, 'yes')}>{'yes'}</Button>
+                <Button onClick={(e) => this.props.onChangeValidate(e, 'no')}>{'no'}</Button>
+            </div>
+        } else {
+            renderBlock = (<div>
+                <Button>{this.props.value}</Button>
+                <Button onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>{'X'}</Button>
+            </div>)
         }
-        const {model, form, value} = this.props;
-        const {key} = form;
 
-        this.props.setDefault(key, model, form, value);
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        return {
-            yesChecked: nextProps.value === 'yes',
-            noChecked: nextProps.value === 'no',
-        }
-    }
-
-
-    divStyle = {
-        padding: '20px',
-    }
-
-    butStyle = {
-        color: '#07f',
+        return renderBlock
     }
 
     render() {
-        return  (
-            <Card>
-                <div style={this.divStyle}>
-                    {this.props.form.title}<br/>
-                    <Checkbox onCheck={(e) => {this.props.onChangeValidate(e,'yes')}}
-                              checked={this.state.yesChecked}
-                              label='Yes'
-                    />
-                    <Checkbox onCheck={(e) => {this.props.onChangeValidate(e,'no')}}
-                              checked={this.state.noChecked}
-                              label='No'
-                    />
-                    {this.props.value === 'yes' || this.props.value === 'no' ?
-                        <Button style={this.butStyle}
-                                onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
-                </div>
-            </Card>
-        );
+        return (
+            <div className={this.props.form.htmlClass}>
+                {this.props.form.title}:<br/>
+                {this.displaySwitch()}
+            </div>
+        )
     }
 }
 
-export default ComposedComponent(TripleBoolean);
+export default ComposedComponent(TripleBoolean)

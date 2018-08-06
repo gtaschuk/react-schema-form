@@ -52,11 +52,11 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
                 value = v;
             }
             break
-
+          case 'object':
+          case 'date':
           case 'array':
             value = e;
             break
-          case 'object':
           default:
             value = e.target.value;
         }

@@ -25,6 +25,7 @@ class ExamplePage extends React.Component {
             {label: "provided for test 2", value: 'data/TokenListing.json'},
             {label: "provided for test 3", value: 'data/TokenProject.json'},
             {label: "provided for test 4", value: 'data/TokenProjectLegalEntities.json'},
+            { label: "Triple Boolean", value: 'data/noanswer.json' },
             {label: "Simple", value: 'data/simple.json'},
             {label: "Simple Array", value: 'data/simplearray.json'},
             {label: "Basic JSON Schema Type", value: 'data/types.json'},

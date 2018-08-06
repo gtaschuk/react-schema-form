@@ -8,8 +8,6 @@ class Text extends Component {
         const {model, form, value} = this.props;
         const {key} = form;
 
-        console.log('KKKEEEYYY', key, this.props);
-
         this.props.setDefault(key, model, form, value)
     }
 
