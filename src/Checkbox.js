@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class FormCheckbox extends Component {
@@ -22,18 +23,21 @@ class FormCheckbox extends Component {
 
     render() {
         return (
-            <FormControlLabel
-                className={this.props.form.className}
-                label={this.props.form.title}
-                control={
-                    <Checkbox
-                    name={this.props.form.key.slice(-1)[0]}
-                    value={this.props.form.key.slice(-1)[0]}
-                    checked={this.props.value || false}
-                    disabled={this.props.form.readonly}
-                    onChange={this.handleChange} />
-                }
-            />
+            <FormGroup row>
+                <FormControlLabel
+                    className={this.props.form.className}
+                    label={this.props.form.title}
+                    control={
+                        <Checkbox
+                            name={this.props.form.key.slice(-1)[0]}
+                            value={this.props.form.key.slice(-1)[0]}
+                            checked={this.props.value || false}
+                            disabled={this.props.form.readonly}
+                            onChange={this.handleChange}
+                        />
+                    }
+                />
+            </FormGroup>
         );
     }
 }
