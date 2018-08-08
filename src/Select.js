@@ -3,25 +3,15 @@ import ComposedComponent from './ComposedComponent'
 import {MuiSelect, InputLabel, MenuItem, FormControl} from '@material-ui/core'
 import {isEmpty} from 'lodash'
 
-const getModelValue = (model, {key, titleMap}) => {
-    let result
-    if (Array.isArray(key)) {
-        result = key.reduce((cur, nxt) => cur && cur[nxt], model)
-    } else {
-        result = model[key]
-    }
-    return result || (titleMap != null ? titleMap[0].value : '')
-}
 
 class Select extends Component {
     constructor(props) {
         super(props)
-        this.onSelected = this.onSelected.bind(this)
 
         const {model, form} = this.props
         const {key} = form
 
-        const storedValue = model && this.getModelKey(model, key) || false
+        const storedValue = model && Select.getModelKey(model, key) || false
         const defaultValue = form.schema.default || false
         const value = !(isEmpty(storedValue)) && storedValue || defaultValue
 
@@ -34,10 +24,21 @@ class Select extends Component {
     static getDerivedStateFromProps(props) {
         if (props.model && props.form.key) {
             return {
-                currentValue: getModelValue(props.model, props.form)
+                currentValue: Select.getModelValue(props.model, props.form)
             }
         }
     }
+
+    static getModelKey = (model, key) => {
+        if (Array.isArray(key)) {
+            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
+        } else {
+            return model[key];
+        }
+    }
+
+    static getModelValue = (model, {key, titleMap}) =>
+        Select.getModelKey(model, key) || (titleMap != null ? titleMap[0].value : '')
 
     onSelected = ({target: {value: currentValue}}) => {
         this.setState({currentValue})

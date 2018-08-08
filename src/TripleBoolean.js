@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ComposedComponent from './ComposedComponent'
-import {Button} from '@material-ui/core'
+import {Button, Checkbox, FormControlLabel, FormGroup} from '@material-ui/core'
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -8,52 +8,43 @@ import {Button} from '@material-ui/core'
  */
 class TripleBoolean extends Component {
 
-    state = {
-        yesChecked: false,
-        noChecked: false,
-    }
-
     constructor(props) {
         super(props)
-
         const {model, form, value} = this.props
         const {key} = form
-
-        this.props.setDefault(key, model, form, value);
+        this.props.setDefault(key, model, form, value)
+        this.state = {
+            yesChecked: false,
+            noChecked: false,
+        }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
+    static getDerivedStateFromProps(nextProps) {
+        return {
             yesChecked: nextProps.value === "yes",
             noChecked: nextProps.value === "no",
-        });
-    }
-
-    divStyle = {
-        padding: "20px",
-    }
-
-    butStyle = {
-        color: "#07f",
-    }
-
-    displaySwitch() {
-        let renderBlock = null
-
-        if (this.props.value === 'unanswered') {
-            renderBlock = <div>
-                <Button onClick={(e) => this.props.onChangeValidate(e, 'yes')}>{'yes'}</Button>
-                <Button onClick={(e) => this.props.onChangeValidate(e, 'no')}>{'no'}</Button>
-            </div>
-        } else {
-            renderBlock = (<div>
-                <Button>{this.props.value}</Button>
-                <Button onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>{'X'}</Button>
-            </div>)
         }
-
-        return renderBlock
     }
+
+
+    displaySwitch = () => (
+        <div style={{padding: "20px"}}>
+            {this.props.form.title}<br/>
+            <FormGroup>
+                <FormControlLabel
+                    label='Yes'
+                    control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'yes')}
+                                       checked={this.state.yesChecked}/>}/>
+                <FormControlLabel
+                    label='No'
+                    control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'no')}
+                                       checked={this.state.noChecked}/>}/>
+            </FormGroup>
+            {(this.props.value === 'yes' || this.props.value === 'no') &&
+            <Button variant='raised' color='primary'
+                    onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>clear response</Button>}
+        </div>
+    )
 
     render() {
         return (

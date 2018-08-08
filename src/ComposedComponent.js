@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-var utils = require('./utils');
+import utils from './utils';
 
 export default (ComposedComponent, defaultProps = {}) => class Composer extends Component {
 
     constructor(props) {
         super(props);
-        this.onChangeValidate = this.onChangeValidate.bind(this);
-        let value = this.defaultValue(this.props);
+        let value = Composer.defaultValue(this.props);
         let validationResult = utils.validate(this.props.form, value);
         this.state = {
             value: value,
@@ -15,26 +14,27 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-      let value = this.defaultValue(nextProps);
+    static getDerivedStateFromProps(nextProps) {
+      let value = Composer.defaultValue(nextProps);
       let validationResult = utils.validate(nextProps.form, value);
-      this.setState({
+      return {
         value: value,
         valid: !!(validationResult.valid || !value),
         error: !validationResult.valid && value ? validationResult.error.message : null
-      });
+      }
     }
 
     /**
      * Called when <input> value changes.
-     * @param e The input element, or something.
+     * @param e The input event.
+     * @param v e.target.value equivalent when it otherwise wouldn't be there.
      */
-    onChangeValidate(e,v) {
+    onChangeValidate = (e,v) => {
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
           case 'number':
-            if (e.target.value.indexOf('.') == -1) {
+            if (e.target.value.indexOf('.') === -1) {
                 value = parseInt(e.target.value);
             } else {
                 value = parseFloat(e.target.value);
@@ -48,14 +48,15 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
             value = e.target.checked;
             break;
           case 'tBoolean':
-            if(e.target.value != 'yes' || e.target.value != 'no') {
+            if(e.target.value !== 'yes' || e.target.value !== 'no') {
                 value = v;
             }
             break
           case 'object':
-          case 'date':
           case 'array':
             value = e;
+            break
+          case 'date':
             break
           default:
             value = e.target.value;
@@ -72,11 +73,7 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
         this.props.onChange(this.props.form.key, value);
     }
 
-    defaultValue(props) {
-        // check if there is a value in the model, if there is, display it. Otherwise, check if
-        // there is a default value, display it.
-        // console.log('Text.defaultValue key', this.props.form.key);
-        // console.log('Text.defaultValue model', this.props.model);
+    static defaultValue = (props) => {
         let value;
         if (props.form && props.form.key) {
             value = utils.selectOrSet(props.form.key, props.model);

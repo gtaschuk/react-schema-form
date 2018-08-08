@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
-import {Button, IconButton} from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
+import {Button, DeleteIcon, IconButton} from '@material-ui/core'
 import _ from 'lodash'
 import utils from './utils'
 import ComposedComponent from './ComposedComponent'
@@ -24,7 +23,8 @@ const styles = theme => ({
     }
 })
 
-class Array extends React.Component {
+
+class Array extends Component {
     static ITEM_ID = '_SCHEMAFORM_ITEM_ID'
     static _SEQUENCE = 1
 
@@ -123,11 +123,9 @@ class Array extends React.Component {
         this.props.onChangeValidate(this.state.model)
     }
 
-    setIndex = (index) => {
-        return function (form) {
-            if (form.key) {
-                form.key[form.key.indexOf('')] = index
-            }
+    setIndex = (index) => (form) => {
+        if (form.key) {
+            form.key[form.key.indexOf('')] = index
         }
     }
 
@@ -142,13 +140,11 @@ class Array extends React.Component {
         let {classes, form} = this.props
         let arrays = []
         let model = this.state.model
-        // console.log('Array.render', model);
         for (let i = 0; i < model.length; i++) {
             let item = model[i]
             let forms = form.items.map((form, index) =>
                 this.props.builder(this.copyWithIndex(form, i), this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder)
             )
-            //console.log('forms', i, forms);
             arrays.push(
                 <div className={classes.arrayItem} key={item && item[Array.ITEM_ID] || i}>
                     <IconButton onClick={this.onDelete(i)} className={classes.deleteItemButton}>
@@ -164,7 +160,7 @@ class Array extends React.Component {
                     <label>{this.props.form.title}</label>
                     <div>{arrays}</div>
                 </div>
-                <Button className={classes.addButton} letiant="contained" color="primary" onClick={this.onAppend}>
+                <Button className={classes.addButton} variant="contained" color="primary" onClick={this.onAppend}>
                     {this.props.form.add || 'Add'}
                 </Button>
             </div>

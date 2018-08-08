@@ -1,6 +1,6 @@
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from '@material-ui/core/TextField';
+import {TextField} from '@material-ui/core';
 
 /**
  * There is no default number picker as part of Material-UI.

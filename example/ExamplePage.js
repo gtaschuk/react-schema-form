@@ -122,15 +122,13 @@ class ExamplePage extends React.Component {
         let validate = ''
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
-                            onModelChange={this.onModelChange.bind(this)} mapper={mapper}/>
-            )
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange.bind(this)} mapper={mapper} />
+            );
             validate = (
                 <div>
-                    <Button variant='raised' color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
-                    <Button variant='raised' color='primary' onClick={this.setStateDefault.bind(this)}>Throw temp model
-                        in</Button>
-                    <pre>{JSON.stringify(this.state.validationResult, undefined, 2)}</pre>
+                    <Button variant="raised" color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
+                    <Button variant='raised' color='primary' onClick={this.setStateDefault.bind(this)}>Throw temp model in</Button>
+                    <pre>{JSON.stringify(this.state.validationResult,undefined,2)}</pre>
                 </div>
             )
         }
@@ -153,17 +151,13 @@ class ExamplePage extends React.Component {
                                 name='selectTest'
                                 value={this.state.selected}
                                 options={this.state.tests}
-                                onChange={this.onSelectChange.bind(this)}>
+                                onChange={this.onSelectChange}>
                             </Select>
                         </div>
                         <h3>Form</h3>
-                        <AceEditor mode='json' theme='github' height='300px' width='800px'
-                                   onChange={this.onFormChange.bind(this)} name='aceForm' value={this.state.formJson}
-                                   editorProps={{$blockScrolling: true}}/>
+                            <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                        <AceEditor mode='json' theme='github' height='300px' width='800px'
-                                   onChange={this.onSchemaChange.bind(this)} name='aceSchema'
-                                   value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
+                            <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
