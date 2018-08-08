@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
 import {TextField} from '@material-ui/core';
 
@@ -6,36 +6,31 @@ import {TextField} from '@material-ui/core';
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class Number extends React.Component {
+class Number extends Component {
 
     constructor(props) {
         super(props);
-        this.preValidationCheck = this.preValidationCheck.bind(this);
         this.state = {
             lastSuccessfulValue: this.props.value
         }
         this.numberField = React.createRef();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
+    static getDerivedStateFromProps(nextProps) {
+        return {
             lastSuccessfulValue: nextProps.value
-        });
+        }
     }
 
-    isNumeric(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
+    isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n)
 
-    isEmpty(n) {
-        return (!n || 0 === n.length);
-    }
+    isEmpty = n => (!n || 0 === n.length)
 
     /**
      * Prevent the field from accepting non-numeric characters.
      * @param e
      */
-    preValidationCheck(e) {
+    preValidationCheck = (e) => {
         if (this.isNumeric(e.target.value)) {
             this.setState({
                 lastSuccessfulValue: e.target.value

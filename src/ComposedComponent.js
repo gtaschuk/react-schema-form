@@ -18,7 +18,7 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
       let value = Composer.defaultValue(nextProps);
       let validationResult = utils.validate(nextProps.form, value);
       return {
-        value: value,
+        value,
         valid: !!(validationResult.valid || !value),
         error: !validationResult.valid && value ? validationResult.error.message : null
       }
@@ -56,8 +56,6 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
           case 'array':
             value = e;
             break
-          case 'date':
-            break
           default:
             value = e.target.value;
         }
@@ -69,7 +67,6 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
             valid: validationResult.valid,
             error: validationResult.valid ? null : validationResult.error.message
         });
-
         this.props.onChange(this.props.form.key, value);
     }
 
