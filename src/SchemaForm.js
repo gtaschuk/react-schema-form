@@ -2,6 +2,7 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
+import FormControl from '@material-ui/core/FormControl';
 import utils from './utils';
 import Number from './Number';
 import Text from './Text';
@@ -56,7 +57,6 @@ class SchemaForm extends React.Component {
     builder(form, model, index, mapper, onChange, builder) {
         const Field = this.mapper[form.type];
         if(!Field) {
-            console.log('Invalid field: \"' + form.key[0] + '\"!');
             return null;
         }
 
@@ -88,13 +88,14 @@ class SchemaForm extends React.Component {
         if (this.props.mapper) {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
-        let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, mapper, this.onChange, this.builder);
-        }.bind(this));
+        let forms = merged.map(
+            (form, index) => this.builder(form, this.props.model, index, mapper, this.onChange, this.builder)
+        );
 
         return (
-            <div style={{width: '100%'}} className={this.props.className ? 'SchemaForm '  + this.props.className : 'SchemaForm'}>{forms}</div>
-
+            <FormControl component="div" className={this.props.className} fullWidth margin="normal">
+                {forms}
+            </FormControl>
         );
     }
 }
