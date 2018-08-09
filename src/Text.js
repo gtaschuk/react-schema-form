@@ -14,18 +14,18 @@ class Text extends React.Component {
     }
 
     render() {
-        //console.log('Text props', this.props);
+        let { form, value, error, onChangeValidate } = this.props
         return (
-            <div className={this.props.form.htmlClass}>
-                <TextField
-                    type={this.props.form.type}
-                    label={this.props.form.title}
-                    helperText={this.props.form.placeholder}
-                    onChange={this.props.onChangeValidate}
-                    defaultValue={this.props.value}
-                    disabled={this.props.form.readonly}
-                 />
-            </div>
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description }
+                error={!!error}
+                onChange={onChangeValidate}
+                defaultValue={value}
+                disabled={form.readonly}
+            />
         );
     }
 }
