@@ -1,10 +1,10 @@
 import React from 'react'
 import {SchemaForm, utils} from 'react-schema-form'
 import AceEditor from 'react-ace'
+import {Button, MenuItem, Select} from '@material-ui/core'
 
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-import Button from '@material-ui/core/Button'
 
 class ExamplePage extends React.Component {
 
@@ -16,6 +16,17 @@ class ExamplePage extends React.Component {
             {
                 'name': '2'
             }
+        ]
+    }
+
+    tempModel = {
+        "comments": [
+          {
+            "name": "1"
+          },
+          {
+            "name": "2"
+          }
         ]
     }
 
@@ -55,9 +66,8 @@ class ExamplePage extends React.Component {
     }
 
     onSelectChange = (val) => {
-        //console.log('Selected:' + val);
         if (!val) {
-            this.setState({
+            return this.setState({
                 schemaJson: '',
                 formJson: '',
                 selected: '',
@@ -65,7 +75,6 @@ class ExamplePage extends React.Component {
                 model: {},
                 form: []
             })
-            return
         }
 
         fetch(val.value)
@@ -150,8 +159,8 @@ class ExamplePage extends React.Component {
                             <Select
                                 name='selectTest'
                                 value={this.state.selected}
-                                options={this.state.tests}
                                 onChange={this.onSelectChange}>
+                                {this.state.tests.map(({label, value}) => <MenuItem value={value}>{label}</MenuItem>)}
                             </Select>
                         </div>
                         <h3>Form</h3>
