@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
 import {TextField} from '@material-ui/core';
+import {selectOrSet} from './utils';
 
 class Text extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Text extends Component {
                 helperText={error || form.description }
                 error={!!error}
                 onChange={onChangeValidate}
-                defaultValue={value}
+                value={value}
                 disabled={form.readonly}
                 fullWidth
             />

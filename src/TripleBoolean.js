@@ -41,7 +41,7 @@ class TripleBoolean extends Component {
                                        checked={this.state.noChecked}/>}/>
             </FormGroup>
             {(this.props.value === 'yes' || this.props.value === 'no') &&
-            <Button variant='raised' color='primary'
+            <Button variant='flat' color='primary'
                     onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>clear response</Button>}
         </div>
     )
