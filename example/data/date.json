@@ -3,11 +3,19 @@
         "type": "object",
         "title": "Types",
         "properties": {
+            "name": {
+                "type": "string",
+                "minLength": 3
+              },
             "date": {
                 "title": "Birthday",
                 "type": "object"
             }
-        }
+        },
+        "required": [
+            "name",
+            "date"
+          ]
     },
     "form": [
         {
