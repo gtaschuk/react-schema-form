@@ -21,6 +21,7 @@ class FormCheckbox extends Component {
 
     handleChange = e => {
         this.props.onChangeValidate(e, 'yes')
+        // this.props.onChangeValidate(e, !this.props.value)
     }
 
     render() {

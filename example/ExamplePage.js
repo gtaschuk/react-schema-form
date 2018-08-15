@@ -2,7 +2,6 @@ import React from 'react'
 import {SchemaForm, utils} from 'react-schema-form'
 import AceEditor from 'react-ace'
 import {Button, MenuItem, Select} from '@material-ui/core'
-
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
@@ -16,17 +15,6 @@ class ExamplePage extends React.Component {
             {
                 'name': '2'
             }
-        ]
-    }
-
-    tempModel = {
-        "comments": [
-          {
-            "name": "1"
-          },
-          {
-            "name": "2"
-          }
         ]
     }
 
@@ -59,7 +47,7 @@ class ExamplePage extends React.Component {
         selected: ''
     }
 
-    setStateDefault = () => {
+    setStateDefault() {
         this.setState({
             model: this.tempModel,
         })
@@ -135,7 +123,7 @@ class ExamplePage extends React.Component {
             );
             validate = (
                 <div>
-                    <Button variant="raised" color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
+                    <Button variant='raised' color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
                     <Button variant='raised' color='primary' onClick={this.setStateDefault.bind(this)}>Throw temp model in</Button>
                     <pre>{JSON.stringify(this.state.validationResult,undefined,2)}</pre>
                 </div>

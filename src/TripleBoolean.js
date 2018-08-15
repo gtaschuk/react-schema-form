@@ -26,31 +26,26 @@ class TripleBoolean extends Component {
         }
     }
 
-
-    displaySwitch = () => (
-        <div style={{padding: "20px"}}>
-            {this.props.form.title}<br/>
-            <FormGroup>
-                <FormControlLabel
-                    label='Yes'
-                    control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'yes')}
-                                       checked={this.state.yesChecked}/>}/>
-                <FormControlLabel
-                    label='No'
-                    control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'no')}
-                                       checked={this.state.noChecked}/>}/>
-            </FormGroup>
-            {(this.props.value === 'yes' || this.props.value === 'no') &&
-            <Button variant='flat' color='primary'
-                    onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>clear response</Button>}
-        </div>
-    )
-
     render() {
         return (
             <div className={this.props.form.htmlClass}>
                 {this.props.form.title}:<br/>
-                {this.displaySwitch()}
+                <div style={{padding: "20px"}}>
+                    {this.props.form.title}<br/>
+                    <FormGroup>
+                        <FormControlLabel
+                            label='Yes'
+                            control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'yes')}
+                                               checked={this.state.yesChecked}/>}/>
+                        <FormControlLabel
+                            label='No'
+                            control={<Checkbox onClick={(e) => this.props.onChangeValidate(e, 'no')}
+                                               checked={this.state.noChecked}/>}/>
+                    </FormGroup>
+                    {(this.props.value === 'yes' || this.props.value === 'no') &&
+                    <Button variant='flat' color='primary'
+                            onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>clear response</Button>}
+                </div>
             </div>
         )
     }

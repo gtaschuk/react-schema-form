@@ -52,14 +52,14 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
                 value = v;
             }
             break
-          case 'object':
+
           case 'array':
             value = e;
             break
+          case 'object':
           default:
             value = e.target.value;
         }
-
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);
         let validationResult = utils.validate(this.props.form, value);
         this.setState({

@@ -55,7 +55,6 @@ class Select extends Component {
                 <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
                 <MuiSelect
                     disabled={this.props.form.readonly}
-                    placeholder={form.title}
                     value={this.state.currentValue || ''}
                     onChange={this.onSelected}>
                     {menuItems}

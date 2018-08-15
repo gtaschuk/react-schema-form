@@ -14,16 +14,6 @@ const styles = theme => ({
 
 class Radios extends Component {
 
-    renderItems = (form) =>
-        form.titleMap.map((item, index) =>
-            <FormControlLabel
-                key={index}
-                control={<Radio checked={this.props.value === item.value}/>}
-                label={item.name}
-                value={item.value}
-                disabled={form.readonly}
-            />)
-
     render() {
         let {classes} = this.props
         return (
@@ -34,7 +24,13 @@ class Radios extends Component {
                     name={this.props.form.title}
                     onChange={this.props.onChangeValidate}
                     className={classes.group}>
-                    {this.renderItems(this.props.form)}
+                    {this.props.form.titleMap.map((item, index) =>
+                        <FormControlLabel
+                            key={index}
+                            label={item.name}
+                            value={item.value}
+                            disabled={this.props.form.readonly}
+                            control={<Radio checked={this.props.value === item.value} />}/>)}
                 </RadioGroup>
             </FormControl>
         )
