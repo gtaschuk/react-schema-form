@@ -31,23 +31,23 @@ class TripleBoolean extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            yesChecked: nextProps.value === "yes",
-            noChecked: nextProps.value === "no",
+            yesChecked: nextProps.value === 'yes',
+            noChecked: nextProps.value === 'no',
         });
     }
 
     divStyle = {
-        padding: "20px",
+        padding: '20px',
     }
 
     butStyle = {
-        color: "#07f",
+        color: '#07f',
     }
 
     displaySwitch() {
         let renderBlock = null;
 
-        renderBlock = <div style={this.divStyle}>
+        renderBlock = (<div style={this.divStyle}>
             {this.props.form.title}<br/>
              <Checkbox onCheck={(e) => {this.props.onChangeValidate(e,'yes')}}
                 checked={this.state.yesChecked}
@@ -60,7 +60,7 @@ class TripleBoolean extends React.Component {
              {this.props.value === 'yes' || this.props.value === 'no' ? 
                 <Button style={this.butStyle}
                     onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
-        </div>;
+        </div>);
 
         return renderBlock;
     }
