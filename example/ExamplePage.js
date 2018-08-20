@@ -1,11 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {SchemaForm, utils} from 'react-schema-form'
 import AceEditor from 'react-ace'
 import {Button, MenuItem, Select} from '@material-ui/core'
-// RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
-class ExamplePage extends React.Component {
+export default class ExamplePage extends Component {
 
     tempModel = {
         'comments': [
@@ -24,7 +23,7 @@ class ExamplePage extends React.Component {
             {label: "provided for test 2", value: 'data/TokenListing.json'},
             {label: "provided for test 3", value: 'data/TokenProject.json'},
             {label: "provided for test 4", value: 'data/TokenProjectLegalEntities.json'},
-            { label: "Triple Boolean", value: 'data/noanswer.json' },
+            {label: "Triple Boolean", value: 'data/noanswer.json'},
             {label: "Simple", value: 'data/simple.json'},
             {label: "Simple Array", value: 'data/simplearray.json'},
             {label: "Basic JSON Schema Type", value: 'data/types.json'},
@@ -79,7 +78,7 @@ class ExamplePage extends React.Component {
             })
     }
 
-    onModelChange(key, val, type) {
+    onModelChange = (key, val, type) => {
         console.log('ExamplePage.onModelChange:', key, val)
         let newModel = this.state.model
         utils.selectOrSet(key, newModel, val, type)
@@ -119,13 +118,14 @@ class ExamplePage extends React.Component {
         let validate = ''
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange.bind(this)} mapper={mapper} />
-            );
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
+                            onModelChange={this.onModelChange.bind(this)} mapper={mapper}/>
+            )
             validate = (
                 <div>
-                    <Button variant='raised' color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
-                    <Button variant='raised' color='primary' onClick={this.setStateDefault.bind(this)}>Throw temp model in</Button>
-                    <pre>{JSON.stringify(this.state.validationResult,undefined,2)}</pre>
+                    <Button variant='raised' color='primary' onClick={this.onValidate}>Validate</Button>
+                    <Button variant='raised' color='primary' onClick={this.setStateDefault}>Throw temp model in</Button>
+                    <pre>{JSON.stringify(this.state.validationResult, undefined, 2)}</pre>
                 </div>
             )
         }
@@ -152,9 +152,12 @@ class ExamplePage extends React.Component {
                             </Select>
                         </div>
                         <h3>Form</h3>
-                            <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange}
+                                   name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                            <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode="json" theme="github" height="300px" width="800px"
+                                   onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson}
+                                   editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
@@ -162,4 +165,3 @@ class ExamplePage extends React.Component {
     }
 }
 
-module.exports = ExamplePage

@@ -52,9 +52,9 @@ class Select extends Component {
         ))
         return (
             <FormControl style={{width: '100%'}}>
-                <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
+                <InputLabel>{form.title}</InputLabel>
                 <MuiSelect
-                    disabled={this.props.form.readonly}
+                    disabled={form.readonly}
                     value={this.state.currentValue || ''}
                     onChange={this.onSelected}>
                     {menuItems}

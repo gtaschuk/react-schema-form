@@ -52,7 +52,6 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
                 value = v;
             }
             break
-
           case 'array':
             value = e;
             break
@@ -60,6 +59,7 @@ export default (ComposedComponent, defaultProps = {}) => class Composer extends 
           default:
             value = e.target.value;
         }
+
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);
         let validationResult = utils.validate(this.props.form, value);
         this.setState({

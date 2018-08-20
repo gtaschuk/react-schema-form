@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -8,7 +8,7 @@ const styles = theme => ({
     }
   });
 
-class FieldSet extends React.Component {
+class FieldSet extends Component {
 
     render() {
         let {form, mapper, builder, model, onChange, classes} = this.props

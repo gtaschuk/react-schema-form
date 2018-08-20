@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import ComposedComponent from './ComposedComponent';
-import {TextField} from '@material-ui/core';
+import React, {Component} from 'react'
+import ComposedComponent from './ComposedComponent'
+import {TextField} from '@material-ui/core'
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -9,11 +9,11 @@ import {TextField} from '@material-ui/core';
 class Number extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             lastSuccessfulValue: this.props.value
         }
-        this.numberField = React.createRef();
+        this.numberField = React.createRef()
     }
 
     static getDerivedStateFromProps(nextProps) {
@@ -34,20 +34,20 @@ class Number extends Component {
         if (this.isNumeric(e.target.value)) {
             this.setState({
                 lastSuccessfulValue: e.target.value
-            });
-            this.props.onChangeValidate(e);
+            })
+            this.props.onChangeValidate(e)
         } else if (this.isEmpty(e.target.value)) {
             this.setState({
                 lastSuccessfulValue: e.target.value
-            });
-            this.props.onChangeValidate(e);
+            })
+            this.props.onChangeValidate(e)
         } else {
-            this.numberField.current.value = this.state.lastSuccessfulValue;
+            this.numberField.current.value = this.state.lastSuccessfulValue
         }
     }
 
     render() {
-        let { form, error} = this.props
+        let {form, error} = this.props
         return (
             <TextField
                 type={form.type}
@@ -59,10 +59,9 @@ class Number extends Component {
                 value={this.state.lastSuccessfulValue}
                 ref={this.numberField}
                 disabled={form.readonly}
-                fullWidth
-            />
-        );
+                fullWidth/>
+        )
     }
 }
 
-export default ComposedComponent(Number);
+export default ComposedComponent(Number)
