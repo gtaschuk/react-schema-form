@@ -64,6 +64,7 @@ class Number extends React.Component {
                 value={this.state.lastSuccessfulValue}
                 ref={this.numberField}
                 disabled={form.readonly}
+                fullWidth
             />
         );
     }

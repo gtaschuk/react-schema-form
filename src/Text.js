@@ -25,6 +25,7 @@ class Text extends React.Component {
                 onChange={onChangeValidate}
                 defaultValue={value}
                 disabled={form.readonly}
+                fullWidth
             />
         );
     }
