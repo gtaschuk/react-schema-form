@@ -59,7 +59,7 @@ export default ComposedComponent => class extends React.Component {
             break
           case 'object':
           default:
-            value = e.target.value;
+            value = e.target.value !== '' ? e.target.value : null;
         }
         
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);

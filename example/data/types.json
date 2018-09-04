@@ -27,7 +27,7 @@
           "a",
           "b",
           "c"
-        ]
+      ]
       },
       "comment": {
         "title": "Comment",
@@ -40,6 +40,29 @@
     "required": ["number"]
   },
   "form": [
-    "*"
+    "string",
+    "anotherstring",
+    "integer",
+    "number",
+    "boolean",
+    {
+      "key": "radios",
+      "type": "radios",
+      "titleMap": [
+          {
+              "value": "c",
+              "name": "C"
+          },
+          {
+              "value": "b",
+              "name": "B"
+          },
+          {
+              "value": "a",
+              "name": "A"
+          }
+      ]
+  },
+  "comment"
   ]
 }

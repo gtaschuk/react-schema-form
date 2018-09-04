@@ -12,14 +12,15 @@ class Select2 extends React.Component {
         super(props);
         this.onSelected = this.onSelected.bind(this);
 
-        const {model, form} = this.props;
+        const {model, form, value} = this.props;
         const {key} = form;
 
         const storedValue = model && this.getModelKey(model, key) || false;
         const defaultValue = form.schema.default || false;
-        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+        // const value = (!(_.isEmpty(storedValue)) && storedValue) || defaultValue;
 
-        this.props.setDefault(key, model, form, value)
+        this.props.setDefault(key, model, form, value);
+
         this.state = {
             currentValue: value,
         };

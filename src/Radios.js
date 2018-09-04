@@ -9,8 +9,16 @@ import {Radio,
 
 class Radios extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        const {model, form, value} = this.props;
+        const {key} = form;
+
+        this.props.setDefault(key, model, form, value);
+    }
+
     render() {
-        //console.log("VALUE", this.state.value);
         let items = this.props.form.titleMap.map(function(item, index) {
             return (
                 <FormControlLabel

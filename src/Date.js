@@ -27,12 +27,11 @@ class Date extends React.Component {
 
 
     onDatePicked(e) {
-        console.log('DATE SELECT', e.target.value, this.props.form.type);
         this.props.onChangeValidate(e);
     }
 
     render() {
-        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : '0';
+        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : 0;
 
         return (
                 <TextField style={{width: '100%', display: 'block'}}

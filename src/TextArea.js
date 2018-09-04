@@ -15,11 +15,11 @@ class TextArea extends React.Component {
                 <TextField
                     type={this.props.form.type}
                     label={this.props.form.title}
-                    helperText={this.props.form.placeholder}
+                    placeholder={this.props.form.placeholder}
                     onChange={this.props.onChangeValidate}
                     error={!!this.props.error}
                     value={value}
-                    
+                    helperText={this.props.error ? this.props.form.validationMessage : ''}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
                 />
