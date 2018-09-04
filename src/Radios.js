@@ -19,6 +19,7 @@ class Radios extends React.Component {
     }
 
     render() {
+        //console.log("VALUE", this.state.value);
         let items = this.props.form.titleMap.map(function(item, index) {
             return (
                 <FormControlLabel
