@@ -93,9 +93,9 @@ class SchemaForm extends React.Component {
         );
 
         return (
-            <FormControl component="div" className={this.props.className} fullWidth margin="normal">
+            <div className={this.props.className}>
                 {forms}
-            </FormControl>
+            </div>
         );
     }
 }
