@@ -1,27 +1,24 @@
-import React from 'react';
-import SchemaForm from '../SchemaForm';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from 'react'
+import SchemaForm from '../SchemaForm'
+import shallowRenderer from 'react-test-renderer/shallow'
 
-configure({ adapter: new Adapter() });
+describe('SchemaForm test', function () {
 
-describe('SchemaForm test', function() {
-
-  it('shows SchemaForm', function() {
-    let cfg = {
-      form: {},
-      schema: {
-        'type': 'object'
-      },
-      model: {},
-      mapper: {}
-    };
-
-    let result = shallow(<SchemaForm
-      schema={cfg.schema}
-      mapper={cfg.mapper}
-    />);
-
-    expect(result.props().className).toEqual('SchemaForm');
-  });
-});
+    it('shows SchemaForm', function () {
+        let cfg = {
+            form: {},
+            schema: {
+                'type': 'object'
+            },
+            model: {},
+            mapper: {}
+        }
+        shallowRenderer.render(<SchemaForm
+            schema={cfg.schema}
+            mapper={cfg.mapper}
+        />)
+        let result = shallowRenderer.getRenderOutput()
+        expect(result.type).toEqual('div')
+        expect(result.props.children).toEqual([])
+    })
+})
