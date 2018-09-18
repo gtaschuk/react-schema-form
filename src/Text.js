@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from '@material-ui/core/TextField';
+import {TextField} from '@material-ui/core';
 
-class Text extends React.Component {
-
+class Text extends Component {
     constructor(props) {
         super(props);
-
         const {model, form, value} = this.props;
         const {key} = form;
+
+        console.log('KKKEEEYYY', key, this.props);
 
         this.props.setDefault(key, model, form, value)
     }

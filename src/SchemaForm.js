@@ -1,6 +1,3 @@
-/**
- * Created by steve on 11/09/15.
- */
 import React from 'react';
 import utils from './utils';
 import Number from './Number';
@@ -14,9 +11,11 @@ import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
+import TripleBoolean from './TripleBoolean';
 import _ from 'lodash';
 
 class SchemaForm extends React.Component {
+
     mapper = {
         'number': Number,
         'text': Text,
@@ -29,31 +28,40 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'tBoolean': TripleBoolean,
         'fieldset': FieldSet
     };
 
     constructor(props) {
         super(props);
-
-        this.onChange = this.onChange.bind(this);
-        this.builder = this.builder.bind(this);
     }
 
     // Assign default values and save it to the model
     setDefault = (key, model, form, value) => {
-        const currentValue = utils.selectOrSet(key, model);
+         const currentValue = utils.selectOrSet(key, model);
 
         // If current value is not setted and exist a default, apply the default over the model
-        if (_.isNil(currentValue) && !_.isNil(value))
+        if (_.isNil(currentValue) && !_.isNil(value)) {
             this.props.onModelChange(key, value, form.type, form);
+        }
     }
 
-    onChange(key, val) {
+    // Assign default values and save it to the model
+    setDefault = (key, model, form, value) => {
+         const currentValue = utils.selectOrSet(key, model);
+
+        // If current value is not setted and exist a default, apply the default over the model
+        if (_.isNil(currentValue) && !_.isNil(value)) {
+            this.props.onModelChange(key, value, form.type, form);
+        }
+    }
+
+    onChange = (key, val) => {
         //console.log('SchemaForm.onChange', key, val);
         this.props.onModelChange(key, val);
     }
 
-    builder(form, model, index, mapper, onChange, builder) {
+    builder = (form, model, index, mapper, onChange, builder) => {
         const Field = this.mapper[form.type];
         if(!Field) {
             return null;
@@ -84,7 +92,7 @@ class SchemaForm extends React.Component {
     render() {
         let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
         let mapper = this.mapper;
-        if (this.props.mapper) {
+        if(this.props.mapper) {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(

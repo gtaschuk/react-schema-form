@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -15,9 +15,9 @@ const styles = theme => ({
       margin: `${theme.spacing.unit}px 0`,
     },
   });
-  
 
-class Radios extends React.Component {
+
+class Radios extends Component {
 
     renderItems(form) {
         return form.titleMap.map(function(item, index) {
@@ -27,7 +27,7 @@ class Radios extends React.Component {
                     control={<Radio />}
                     label={item.name}
                     value={item.value}
-                    disabled={form.readonly}                    
+                    disabled={form.readonly}
                 />
             )
         });
@@ -38,9 +38,9 @@ class Radios extends React.Component {
         return (
             <FormControl component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">{this.props.form.title}</FormLabel>
-                <RadioGroup 
-                    value={this.props.value} 
-                    name={this.props.form.title} 
+                <RadioGroup
+                    value={this.props.value}
+                    name={this.props.form.title}
                     onChange={this.props.onChangeValidate}
                     className={classes.group}>
                   {this.renderItems(this.props.form)}

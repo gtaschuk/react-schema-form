@@ -1,11 +1,13 @@
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import TextField from '@material-ui/core/TextField';
+import React from 'react'
+import ComposedComponent from './ComposedComponent'
+import {TextField} from '@material-ui/core'
+import {selectOrSet} from './utils'
 
 class TextArea extends React.Component {
 
     render() {
-        let { form, value, error, onChangeValidate } = this.props
+        let {form, value, error, onChangeValidate} = this.props
+        value = selectOrSet(this.props.form.key, this.props.model) || ''
         return (
             <TextField
                 type={form.type}
@@ -21,8 +23,8 @@ class TextArea extends React.Component {
                 disabled={form.readonly}
                 fullWidth
             />
-        );
+        )
     }
 }
 
-export default ComposedComponent(TextArea);
+export default ComposedComponent(TextArea)

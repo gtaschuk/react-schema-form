@@ -1,74 +1,77 @@
 {
-  "name": "react-schema-form",
-  "version": "0.4.1",
-  "description": "React json schema form",
-  "keywords": [
-    "json schema",
-    "schema form",
-    "react",
-    "react-component",
-    "form"
-  ],
-  "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
-  "license": "MIT",
-  "main": "./lib/index",
-  "files": [
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE",
-    "css",
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/networknt/react-schema-form.git"
-  },
-  "dependencies": {
-    "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
-    "objectpath": "^1.2.1",
-    "tv4": "^1.3.0"
-  },
-  "devDependencies": {
-    "@material-ui/core": "^3.1.1",
-    "@material-ui/icons": "^3.0.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^7.1.5",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-runtime": "^6.26.0",
-    "css-loader": "^1.0.0",
-    "eslint": "^5.6.0",
-    "eslint-config-recommended": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "jest-cli": "^23.6.0",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-hot-loader": "^4.3.8",
-    "react-test-renderer": "^16.5.1",
-    "rimraf": "^2.6.2",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0"
-  },
-  "scripts": {
-    "lint": "eslint src",
-    "preversion": "webpack -p && git add dist",
-    "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
-    "test": "npm run lint && jest"
-  },
-  "jest": {
-    "verbose": true,
-    "testURL": "http://localhost/",
-    "roots": [
-      "src"
+    "name": "react-schema-form",
+    "version": "0.5.0",
+    "description": "React json schema form",
+    "keywords": [
+        "json schema",
+        "schema form",
+        "react",
+        "react-component",
+        "form"
     ],
-    "standard": {
-      "parser": "babel-eslint"
+    "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
+    "license": "MIT",
+    "main": "./lib/index",
+    "files": [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        "css",
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/networknt/react-schema-form.git"
+    },
+    "dependencies": {
+        "@material-ui/core": "^3.1.1",
+        "@material-ui/icons": "^3.0.1",
+        "classnames": "^2.2.6",
+        "lodash": "^4.17.11",
+        "notevil": "^1.1.0",
+        "objectpath": "^1.2.1",
+        "tv4": "^1.3.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-eslint": "^8.2.6",
+        "babel-jest": "^23.6.0",
+        "babel-loader": "^7.1.5",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-0": "^6.24.1",
+        "babel-runtime": "^6.26.0",
+        "css-loader": "^1.0.0",
+        "enzyme": "^3.4.1",
+        "enzyme-adapter-react-16": "^1.2.0",
+        "eslint": "^5.6.0",
+        "eslint-plugin-react": "^7.11.1",
+        "jest-cli": "^23.6.0",
+        "react": "^16.5.1",
+        "react-dom": "^16.5.1",
+        "react-hot-loader": "^4.3.8",
+        "react-test-renderer": "^16.5.1",
+        "rimraf": "^2.6.2",
+        "style-loader": "^0.21.0",
+        "webpack": "^4.19.1",
+        "webpack-cli": "^3.1.1"
+    },
+    "scripts": {
+        "lint": "eslint src",
+        "preversion": "webpack -p && git add dist",
+        "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
+        "test": "npm run lint && jest"
+    },
+    "jest": {
+        "verbose": true,
+        "testURL": "http://localhost/",
+        "roots": [
+            "src"
+        ],
+        "standard": {
+            "parser": "babel-eslint"
+        }
     }
-  }
 }

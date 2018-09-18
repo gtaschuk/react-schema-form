@@ -1,6 +1,3 @@
-/**
- * Created by steve on 20/09/15.
- */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
