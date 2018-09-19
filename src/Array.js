@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
 import {Button, DeleteIcon, IconButton} from '@material-ui/core'
-import _ from 'lodash'
 import utils from './utils'
+import cloneDeep from 'lodash/cloneDeep'
 import ComposedComponent from './ComposedComponent'
 
 
@@ -130,7 +130,7 @@ class Array extends Component {
     }
 
     copyWithIndex = (form, index) => {
-        let copy = _.cloneDeep(form)
+        let copy = cloneDeep(form)
         copy.arrayIndex = index
         utils.traverseForm(copy, this.setIndex(index))
         return copy
