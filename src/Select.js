@@ -54,8 +54,9 @@ class Select extends Component {
             <FormControl style={{width: '100%'}}>
                 <InputLabel>{form.title}</InputLabel>
                 <MuiSelect
-                    disabled={form.readonly}
                     value={this.state.currentValue || ''}
+                    placeholder={form.title}
+                    disabled={form.readonly}
                     onChange={this.onSelected}>
                     {menuItems}
                 </MuiSelect>
