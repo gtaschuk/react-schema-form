@@ -1,33 +1,30 @@
-/**
- * Created by steve on 15/09/15.
- */
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import React from 'react'
+import ComposedComponent from './ComposedComponent'
+import {TextField} from '@material-ui/core'
+import {selectOrSet} from './utils'
 
 class TextArea extends React.Component {
 
     render() {
-        // FIXME: Obviously fix rowsMax eventually..
-        //console.log('TextArea', this.props.form);
+        let {form, value, error, onChangeValidate} = this.props
+        value = selectOrSet(this.props.form.key, this.props.model) || ''
         return (
-            <div className={this.props.form.htmlClass}>
-                <TextField
-                    type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    onChange={this.props.onChangeValidate}
-                    errorText={this.props.error || this.props.errorText}
-                    defaultValue={this.props.value}
-                    multiLine
-                    rows={this.props.form.rows}
-                    rowsMax={this.props.form.rowsMax}
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}}
-                />
-            </div>
-        );
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description}
+                onChange={onChangeValidate}
+                error={!!error}
+                value={value}
+                multiline
+                rows={form.rows}
+                rowsMax={form.rowsMax}
+                disabled={form.readonly}
+                fullWidth
+            />
+        )
     }
 }
 
-export default ComposedComponent(TextArea);
+export default ComposedComponent(TextArea)

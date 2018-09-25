@@ -3,19 +3,28 @@
         "type": "object",
         "title": "Types",
         "properties": {
-            "name":  {
+<<<<<<< HEAD
+            "name": {
                 "type": "string",
                 "minLength": 3
-            },
+              },
+=======
+>>>>>>> eb09fdb... added fixes and some tests
             "date": {
-                "title": "Date",
+                "title": "Birthday",
                 "type": "object"
             }
+<<<<<<< HEAD
         },
-        "required": ["name", "date"]
+        "required": [
+            "name",
+            "date"
+          ]
+=======
+        }
+>>>>>>> eb09fdb... added fixes and some tests
     },
     "form": [
-        "name",
         {
             "key": "date",
             "type": "date"

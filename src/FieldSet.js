@@ -1,37 +1,30 @@
-/**
- * Created by steve on 11/09/15.
- */
-import React from 'react';
-import utils from './utils';
-import Number from './Number';
-import Text from './Text';
-import TextArea from './TextArea';
-import Select from './Select';
-import Radios from './Radios';
-import Date from './Date';
-import Checkbox from './Checkbox';
-import Help from './Help';
-import RaisedButton from 'material-ui/RaisedButton';
-import _ from 'lodash';
+import React, {Component} from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import { withStyles } from '@material-ui/core/styles';
 
-class FieldSet extends React.Component {
+const styles = theme => ({
+    root: {
+      marginTop:  theme.spacing.unit
+    }
+  });
+
+class FieldSet extends Component {
 
     render() {
-        //console.log('FieldSet.render', this.props);
+        let {form, mapper, builder, model, onChange, classes} = this.props
         // now render all the items in the fieldset
-        let forms = this.props.form.items.map(function(form, index){
-            return this.props.builder(form, this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder);
-        }.bind(this));
+        let forms = form.items.map(
+            (f, index) => builder(f, model, index, onChange, mapper, builder)
+        );
 
         return (
-            <fieldset>
-                <legend>{this.props.form.title}</legend>
+            <FormControl component="fieldset" className={classes.root}>
                 <div>
                     {forms}
                 </div>
-            </fieldset>
-        );
+            </FormControl>
+        )
     }
 }
 
-export default FieldSet;
+export default withStyles(styles)(FieldSet);
