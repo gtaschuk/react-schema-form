@@ -1,10 +1,12 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {SchemaForm, utils} from 'react-schema-form'
 import AceEditor from 'react-ace'
-import {Button, MenuItem, Select} from '@material-ui/core'
+import {Button, FormControl, InputLabel, MenuItem, Select} from '@material-ui/core'
+import {ErrorBoundary} from './ErrorBoundary'
+// RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
-export default class ExamplePage extends Component {
+export default class ExamplePage extends React.Component {
 
     tempModel = {
         'comments': [
@@ -19,14 +21,10 @@ export default class ExamplePage extends Component {
 
     state = {
         tests: [
-            {label: "provided for test 1", value: 'data/Token.json'},
-            {label: "provided for test 2", value: 'data/TokenListing.json'},
-            {label: "provided for test 3", value: 'data/TokenProject.json'},
-            {label: "provided for test 4", value: 'data/TokenProjectLegalEntities.json'},
-            {label: "Triple Boolean", value: 'data/noanswer.json'},
-            {label: "Simple", value: 'data/simple.json'},
-            {label: "Simple Array", value: 'data/simplearray.json'},
-            {label: "Basic JSON Schema Type", value: 'data/types.json'},
+            {label: 'Simple', value: 'data/simple.json'},
+            {label: 'Triple Boolean', value: 'data/noanswer.json'},
+            {label: 'Simple Array', value: 'data/simplearray.json'},
+            {label: 'Basic JSON Schema Type', value: 'data/types.json'},
             {label: 'Basic Radios', value: 'data/radio.json'},
             {label: 'Condition', value: 'data/condition.json'},
             {label: 'Kitchen Sink', value: 'data/kitchenSink.json'},
@@ -46,14 +44,10 @@ export default class ExamplePage extends Component {
         selected: ''
     }
 
-    setStateDefault() {
-        this.setState({
-            model: this.tempModel,
-        })
-    }
+    setStateDefault = () => this.setState({model: this.tempModel})
 
-    onSelectChange = (val) => {
-        if (!val) {
+    onSelectChange = ({target: {value}}) => {
+        if (!value) {
             return this.setState({
                 schemaJson: '',
                 formJson: '',
@@ -64,13 +58,13 @@ export default class ExamplePage extends Component {
             })
         }
 
-        fetch(val.value)
+        fetch(value)
             .then(x => x.json())
             .then(({form, schema}) => {
                 this.setState({
                     schemaJson: JSON.stringify(schema, undefined, 2),
                     formJson: JSON.stringify(form, undefined, 2),
-                    selected: val.value,
+                    selected: value,
                     schema,
                     model: {},
                     form,
@@ -79,6 +73,7 @@ export default class ExamplePage extends Component {
     }
 
     onModelChange = (key, val, type) => {
+        // eslint-disable-next-line no-console
         console.log('ExamplePage.onModelChange:', key, val)
         let newModel = this.state.model
         utils.selectOrSet(key, newModel, val, type)
@@ -86,6 +81,7 @@ export default class ExamplePage extends Component {
     }
 
     onValidate = () => {
+        // eslint-disable-next-line no-console
         console.log('ExamplePage.onValidate is called')
         let result = utils.validateBySchema(this.state.schema, this.state.model)
         this.setState({validationResult: result})
@@ -93,18 +89,20 @@ export default class ExamplePage extends Component {
 
     onFormChange = (val) => {
         try {
-            let f = JSON.parse(val)
-            this.setState({formJson: val, form: f})
+            const form = JSON.parse(val)
+            this.setState({formJson: val, form})
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.error(e)
         }
     }
 
     onSchemaChange = (val) => {
         try {
-            let s = JSON.parse(val)
-            this.setState({schemaJson: val, schema: s})
+            const schema = JSON.parse(val)
+            this.setState({schemaJson: val, schema})
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.error(e)
         }
     }
@@ -117,10 +115,12 @@ export default class ExamplePage extends Component {
         let schemaForm = ''
         let validate = ''
         if (this.state.form.length > 0) {
-            schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
-                            onModelChange={this.onModelChange.bind(this)} mapper={mapper}/>
-            )
+            // schemaForm = (
+            //     <ErrorBoundary>
+            //         <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
+            //                     onModelChange={this.onModelChange} mapper={mapper}/>
+            //     </ErrorBoundary>
+            // )
             validate = (
                 <div>
                     <Button variant='raised' color='primary' onClick={this.onValidate}>Validate</Button>
@@ -143,25 +143,29 @@ export default class ExamplePage extends Component {
                     </div>
                     <div className='col-sm-8'>
                         <h3>Select Example</h3>
-                        <div className='form-group'>
+                        <FormControl classes={{root: 'form-group'}} style={{minWidth: 150}}>
+                            <InputLabel htmlFor="select-test">select-test</InputLabel>
                             <Select
+                                autoWidth
                                 name='selectTest'
+                                inputProps={{name: 'selectTest', id: 'select-test'}}
                                 value={this.state.selected}
                                 onChange={this.onSelectChange}>
-                                {this.state.tests.map(({label, value}) => <MenuItem value={value}>{label}</MenuItem>)}
+                                {this.state.tests.map(({label, value}) =>
+                                    <MenuItem key={value} value={value}>{label}</MenuItem>)}
                             </Select>
-                        </div>
+                        </FormControl>
                         <h3>Form</h3>
-                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange}
-                                   name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode='json' theme='github' height='300px' width='800px'
+                                   onChange={this.onFormChange} name='aceForm'
+                                   value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                        <AceEditor mode="json" theme="github" height="300px" width="800px"
-                                   onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson}
-                                   editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode='json' theme='github' height='300px' width='800px'
+                                   onChange={this.onSchemaChange} name='aceSchema'
+                                   value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
         )
     }
 }
-

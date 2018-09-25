@@ -87,7 +87,6 @@ export default class SchemaForm extends Component {
         let forms = merged.map(
             (form, index) => this.builder(form, this.props.model, index, mapper, this.onChange, this.builder)
         )
-
         return (
             <div className={this.props.className}>
                 {forms}
