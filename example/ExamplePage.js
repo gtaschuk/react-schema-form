@@ -21,7 +21,10 @@ class ExamplePage extends React.Component {
 
     state = {
         tests: [
-            {label: 'Simple', value: 'data/simple.json'},
+            {label: 'Token', value: 'data/Token.json'},
+            {label: 'TokenListing', value: 'data/TokenListing.json'},
+            {label: 'TokenProject', value: 'data/TokenProject.json'},
+            {label: 'TokenProjectLegalEntities', value: 'data/TokenProjectLegalEntities.json'},
             {label: 'Triple Boolean', value: 'data/noanswer.json'},
             {label: 'Simple Array', value: 'data/simplearray.json'},
             {label: 'Basic JSON Schema Type', value: 'data/types.json'},
@@ -73,6 +76,7 @@ class ExamplePage extends React.Component {
     }
 
     onModelChange = (key, val, type) => {
+        // eslint-disable-next-line no-console
         console.log('ExamplePage.onModelChange:', key, val)
         let newModel = this.state.model
         utils.selectOrSet(key, newModel, val, type)
@@ -80,6 +84,7 @@ class ExamplePage extends React.Component {
     }
 
     onValidate = () => {
+        // eslint-disable-next-line no-console
         console.log('ExamplePage.onValidate is called')
         let result = utils.validateBySchema(this.state.schema, this.state.model)
         this.setState({validationResult: result})
@@ -90,6 +95,7 @@ class ExamplePage extends React.Component {
             const form = JSON.parse(val)
             this.setState({formJson: val, form})
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.error(e)
         }
     }
@@ -99,6 +105,7 @@ class ExamplePage extends React.Component {
             const schema = JSON.parse(val)
             this.setState({schemaJson: val, schema})
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.error(e)
         }
     }

@@ -1,15 +1,18 @@
-/**
- * Created by steve on 15/09/15.
- */
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import TextField from '@material-ui/core/TextField';
+import React from 'react'
+import TextField from '@material-ui/core/TextField'
+import ComposedComponent from './ComposedComponent'
 
 class TextArea extends React.Component {
 
+    constructor(props) {
+        super(props)
+        const {model, form, value} = props
+        const {key} = form
+        this.props.setDefault(key, model, form, value)
+    }
+
     render() {
-        let { form, value, error, onChangeValidate } = this.props
-        // FIXME: Obviously fix rowsMax eventually..
+        let {form, error, value, onChangeValidate} = this.props
         return (
             <TextField
                 type={form.type}
@@ -18,10 +21,10 @@ class TextArea extends React.Component {
                 helperText={error || form.description}
                 onChange={onChangeValidate}
                 error={!!error}
-                value={value}
+                value={value || ''}
                 multiline
-                rows={form.rows }
-                rowsMax={form.rowsMax }
+                rows={form.rows}
+                rowsMax={form.rowsMax}
                 disabled={form.readonly}
                 fullWidth
             />
@@ -29,4 +32,4 @@ class TextArea extends React.Component {
     }
 }
 
-export default ComposedComponent(TextArea);
+export default ComposedComponent(TextArea)

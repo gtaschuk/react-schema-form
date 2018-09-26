@@ -1,4 +1,3 @@
-
 import ComposedComponent from './ComposedComponent';
 import NativeDateField from './NativeDateField'
 

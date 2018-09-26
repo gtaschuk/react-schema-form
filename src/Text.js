@@ -1,11 +1,8 @@
-/**
- * Created by steve on 15/09/15.
- */
-import React from 'react';
+import React, {Component} from 'react';
 import ComposedComponent from './ComposedComponent';
 import TextField from '@material-ui/core/TextField';
 
-class Text extends React.Component {
+class Text extends Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +21,7 @@ class Text extends React.Component {
                 helperText={error || form.description }
                 error={!!error}
                 onChange={onChangeValidate}
-                value={value}
+                value={value || ''}
                 disabled={form.readonly}
                 fullWidth
             />

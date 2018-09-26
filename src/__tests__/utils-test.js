@@ -1,20 +1,9 @@
-/**
- * Created by steve on 11/09/15.
- */
-jest.dontMock('../utils');
-jest.dontMock('lodash');
+import utils from '../utils'
+import _ from 'lodash'
 
 describe('utils', function () {
-
-    var utils;
-    var _;
-    beforeEach(function () {
-        utils = require('../utils');
-        _ = require('lodash');
-    });
-
     it('gets defaults from schema and form', function () {
-        var schema = {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -40,22 +29,22 @@ describe('utils', function () {
                     'type': 'object',
                     'required': ['eyecolor'],
                     'properties': {
-                        'eyecolor': { 'type': 'string', 'title': 'Eye color' },
-                        'haircolor': { 'type': 'string', 'title': 'Hair color' },
+                        'eyecolor': {'type': 'string', 'title': 'Eye color'},
+                        'haircolor': {'type': 'string', 'title': 'Hair color'},
                         'shoulders': {
                             'type': 'object',
                             'title': 'Shoulders',
                             'properties': {
-                                'left': { 'type': 'string' },
-                                'right': { 'type': 'string' }
+                                'left': {'type': 'string'},
+                                'right': {'type': 'string'}
                             }
                         }
                     }
                 }
             }
-        };
+        }
 
-        var form = [
+        let form = [
             {
                 'title': 'Name',
                 'description': 'Gimme yea name lad',
@@ -212,14 +201,14 @@ describe('utils', function () {
                     }
                 ]
             }
-        ];
-        var f = utils.getDefaults(schema);
+        ]
+        let f = utils.getDefaults(schema)
         //console.log('f = ', f);
-        expect(f.form).toEqual(form);
-    });
+        expect(f.form).toEqual(form)
+    })
 
-    it('should handle global defaults',function(){
-        var schema = {
+    it('should handle global defaults', function () {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -228,9 +217,9 @@ describe('utils', function () {
                     'type': 'string'
                 }
             }
-        };
+        }
 
-        var form = [
+        let form = [
             {
                 'title': 'Name',
                 'description': 'Gimme yea name lad',
@@ -245,14 +234,14 @@ describe('utils', function () {
                 ],
                 'type': 'text'
             }
-        ];
+        ]
 
-        var f = utils.getDefaults(schema,{},{ formDefaults: { foo: 'bar' } });
-        expect(f.form).toEqual(form);
-    });
+        let f = utils.getDefaults(schema, {}, {formDefaults: {foo: 'bar'}})
+        expect(f.form).toEqual(form)
+    })
 
-    it('should handle x-schema-form defaults',function(){
-        var schema = {
+    it('should handle x-schema-form defaults', function () {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -264,13 +253,13 @@ describe('utils', function () {
                     }
                 }
             }
-        };
-        var f = utils.getDefaults(schema,{});
-        expect(f.form[0].type).toEqual('textarea');
-    });
+        }
+        let f = utils.getDefaults(schema, {})
+        expect(f.form[0].type).toEqual('textarea')
+    })
 
-    it('should ignore parts of schema in ignore list',function(){
-        var schema = {
+    it('should ignore parts of schema in ignore list', function () {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -288,15 +277,15 @@ describe('utils', function () {
                     ]
                 }
             }
-        };
+        }
 
         //no form is implicitly ['*']
-        var defaults = utils.getDefaults(schema).form;
-        expect(utils.merge(schema,['*'],{gender:true})).toEqual([defaults[0]]);
-    });
+        let defaults = utils.getDefaults(schema).form
+        expect(utils.merge(schema, ['*'], {gender: true})).toEqual([defaults[0]])
+    })
 
     it('merges schema with different forms', function () {
-        var schema = {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -314,27 +303,27 @@ describe('utils', function () {
                     ]
                 }
             }
-        };
+        }
 
         //no form is implicitly ['*']
-        var defaults = utils.getDefaults(schema).form;
-        expect(utils.merge(schema)).toEqual(defaults);
-        expect(utils.merge(schema,['*'])).toEqual(defaults);
-        expect(utils.merge(schema,['*',{type:'fieldset'}])).toEqual(defaults.concat([{type:'fieldset'}]));
+        let defaults = utils.getDefaults(schema).form
+        expect(utils.merge(schema)).toEqual(defaults)
+        expect(utils.merge(schema, ['*'])).toEqual(defaults)
+        expect(utils.merge(schema, ['*', {type: 'fieldset'}])).toEqual(defaults.concat([{type: 'fieldset'}]))
 
         //simple form
-        expect(utils.merge(schema,['gender'])).toEqual([defaults[1]]);
-        expect(utils.merge(schema,['gender','name'])).toEqual([defaults[1],defaults[0]]);
+        expect(utils.merge(schema, ['gender'])).toEqual([defaults[1]])
+        expect(utils.merge(schema, ['gender', 'name'])).toEqual([defaults[1], defaults[0]])
 
         //change it up
-        var f = _.cloneDeep(defaults[0]);
-        f.title = 'Foobar';
-        f.type  = 'password';
-        expect(utils.merge(schema,[{ key: 'name',title: 'Foobar',type: 'password'}])).toEqual([f]);
-    });
+        let f = _.cloneDeep(defaults[0])
+        f.title = 'Foobar'
+        f.type = 'password'
+        expect(utils.merge(schema, [{key: 'name', title: 'Foobar', type: 'password'}])).toEqual([f])
+    })
 
-    it('should translate readOnly in schema to readonly on the merged form defintion',function(){
-        var schema = {
+    it('should translate readOnly in schema to readonly on the merged form defintion', function () {
+        let schema = {
             'type': 'object',
             'properties': {
                 'name': {
@@ -353,14 +342,14 @@ describe('utils', function () {
                     ]
                 }
             }
-        };
+        }
 
-        var merged = utils.merge(schema, ['gender']);
-        expect(merged[0].readonly).toEqual(true);
-    });
+        let merged = utils.merge(schema, ['gender'])
+        expect(merged[0].readonly).toEqual(true)
+    })
 
-    it('should push readOnly in schema down into objects and arrays', function() {
-        var schema = {
+    it('should push readOnly in schema down into objects and arrays', function () {
+        let schema = {
             'type': 'object',
             'readOnly': true,
             'properties': {
@@ -381,22 +370,22 @@ describe('utils', function () {
                     }
                 }
             }
-        };
+        }
 
-        var merged = utils.merge(schema, ['*']);
+        let merged = utils.merge(schema, ['*'])
 
         //sub
-        expect(merged[0].readonly).toEqual(true);
+        expect(merged[0].readonly).toEqual(true)
 
         //array
-        expect(merged[0].items[0].readonly).toEqual(true);
+        expect(merged[0].items[0].readonly).toEqual(true)
 
         //array items
-        expect(merged[0].items[0].items[0].readonly).toEqual(true);
-    });
+        expect(merged[0].items[0].items[0].readonly).toEqual(true)
+    })
 
-    it('should push readonly in form def down into objects and arrays', function() {
-        var schema = {
+    it('should push readonly in form def down into objects and arrays', function () {
+        let schema = {
             'type': 'object',
             'properties': {
                 'sub': {
@@ -416,22 +405,22 @@ describe('utils', function () {
                     }
                 }
             }
-        };
+        }
 
-        var merged = utils.merge(schema, [{key: 'sub', readonly: true}]);
+        let merged = utils.merge(schema, [{key: 'sub', readonly: true}])
 
         //sub
-        expect(merged[0].readonly).toEqual(true);
+        expect(merged[0].readonly).toEqual(true)
 
         //array
-        expect(merged[0].items[0].readonly).toEqual(true);
+        expect(merged[0].items[0].readonly).toEqual(true)
 
         //array items
-        expect(merged[0].items[0].items[0].readonly).toEqual(true);
-    });
+        expect(merged[0].items[0].items[0].readonly).toEqual(true)
+    })
 
-    xit('should select and set into objects and arrays', function() {
-        var schema = {
+    xit('should select and set into objects and arrays', function () {
+        let schema = {
             'key': [
                 'comments'
             ],
@@ -541,19 +530,19 @@ describe('utils', function () {
                 }
             },
             'type': 'array'
-        };
+        }
 
 
-        //var list = utils.selectOrSet(schema, [{key: 'sub', readonly: true}]);
-        var merged = utils.merge(schema, [{key: 'sub', readonly: true}]);
+        //let list = utils.selectOrSet(schema, [{key: 'sub', readonly: true}]);
+        let merged = utils.merge(schema, [{key: 'sub', readonly: true}])
         // sub
-        expect(merged[0].readonly).toEqual(true);
+        expect(merged[0].readonly).toEqual(true)
 
         //array
-        expect(merged[0].items[0].readonly).toEqual(true);
+        expect(merged[0].items[0].readonly).toEqual(true)
 
         //array items
-        expect(merged[0].items[0].items[0].readonly).toEqual(true);
-    });
+        expect(merged[0].items[0].items[0].readonly).toEqual(true)
+    })
 
-});
+})

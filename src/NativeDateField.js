@@ -1,18 +1,18 @@
 /*
-Native date field. 
+Native date field.
 Contains common logic for final components Date and DateTime.
 */
-import React from 'react';
+import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 
-class NativeDateField extends React.Component {
+class NativeDateField extends Component {
 
     constructor(props) {
         super(props);
         this.onDatePicked = this.onDatePicked.bind(this);
     }
 
-    onDatePicked(e) {
+    onDatePicked = (e) => {
         let date = new Date(e.target.value);
         this.props.onChangeValidate(date);
     }

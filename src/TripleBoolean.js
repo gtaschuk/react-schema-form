@@ -1,85 +1,63 @@
-/**
- * Created by steve on 15/09/15.
- */
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import {Card, 
-        Button, 
-        Checkbox,
-        FormControlLabel,
-        FormGroup } from '@material-ui/core';
-// import { withStyles } from 'material-ui/styles';
-// import Typography from 'material-ui/styles/typography';
+import React, {Component} from 'react'
+import ComposedComponent from './ComposedComponent'
+import {
+    Card,
+    Button,
+    Checkbox,
+    FormControlLabel,
+    FormGroup
+} from '@material-ui/core'
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class TripleBoolean extends React.Component {
-
-    state = {
-        yesChecked: false,
-        noChecked: false,
-    }
-
+class TripleBoolean extends Component {
     constructor(props) {
-        super(props);
-
-        const {model, form, value} = this.props;
-        const {key} = form;
-
-        this.props.setDefault(key, model, form, value);
+        super(props)
+        const {model, form, value} = props
+        const {key} = form
+        this.props.setDefault(key, model, form, value)
+        this.state = {
+            yesChecked: false,
+            noChecked: false,
+        }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            yesChecked: nextProps.value === 'yes',
-            noChecked: nextProps.value === 'no',
-        });
-    }
-
-    divStyle = {
-        padding: '20px',
-    }
-
-    butStyle = {
-        color: '#07f',
-    }
-
-    displaySwitch() {
-        let renderBlock = null;
-
-        renderBlock = (<div style={this.divStyle}>
-            {this.props.form.title}<br/>
-            <FormGroup >
-                <FormControlLabel control={
-                        <Checkbox onClick={(e) => {this.props.onChangeValidate(e,'yes')}}
-                            checked={this.state.yesChecked}
-                        />}
-                        label='Yes'
-                />
-                <FormControlLabel control={
-                        <Checkbox onClick={(e) => {this.props.onChangeValidate(e,'no')}}
-                            checked={this.state.noChecked}
-                        />}
-                        label='No'
-                />
-            </FormGroup>
-             {this.props.value === 'yes' || this.props.value === 'no' ? 
-                <Button id='temp' variant='flat' color='primary'
-                    onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
-        </div>);
-
-        return renderBlock;
+    static getDerivedStateFromProps(props) {
+        return {
+            yesChecked: props.value === 'yes',
+            noChecked: props.value === 'no',
+        }
     }
 
     render() {
-        return  (
+        return (
             <Card>
-                {this.displaySwitch()}
+                <div style={{padding: '20px'}}>
+                    {this.props.form.title}
+                    <br/>
+                    <FormGroup>
+                        <FormControlLabel
+                            label='Yes'
+                            control={
+                            <Checkbox onClick={(e) => this.props.onChangeValidate(e, 'yes')}
+                                      checked={this.state.yesChecked}/>}/>
+                        <FormControlLabel
+                            label='No'
+                            control={
+                            <Checkbox onClick={(e) => this.props.onChangeValidate(e, 'no')}
+                                      checked={this.state.noChecked}/>}/>
+                    </FormGroup>
+                    {(this.props.value === 'yes' || this.props.value === 'no') &&
+                    <Button id='temp' variant='flat' color='primary'
+                            onClick={(e) => this.props.onChangeValidate(e, 'unanswered')}>
+                        clear response
+                    </Button>}
+                </div>
             </Card>
-        );
+        )
     }
 }
 
-export default ComposedComponent(TripleBoolean);
+export default ComposedComponent(TripleBoolean)
