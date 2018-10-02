@@ -89,7 +89,7 @@ class SchemaForm extends Component {
         }
 
         return (
-            <div className={this.props.className}>
+            <div className={this.props.classes.root}>
                 {merged.map((form, index) =>
                     this.builder(form, this.props.model, index, mapper, this.onChange, this.builder)
                 )}
