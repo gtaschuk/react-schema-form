@@ -1,0 +1,63 @@
+{
+  "path": "/identifiers",
+  "schema": {
+    "type": "object",
+    "title": "Identifiers",
+    "properties": {
+      "identifiersList": {
+        "title": "Identifiers",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "title": "Identifier",
+              "type": "string"
+            },
+            "identifierType": {
+              "title": "Identifier Type",
+              "type": "string",
+              "enum": [
+                null,
+                "Belgian",
+                "Common",
+                "CTA",
+                "CUSIP",
+                "ISIN",
+                "Other",
+                "QUICK",
+                "SEDOL",
+                "Sicovam",
+                "Valoren",
+                "Wertpapier"
+              ]
+            },
+            "otherIdentificationType": {
+              "title": "Other Identification Type",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "fieldset",
+      "items": [
+        {
+          "key": "identifiersList",
+          "add": "New Identifier",
+          "style": {
+            "add": "identifiersList"
+          },
+          "items": [
+            "identifiersList[].identifierType",
+            "identifiersList[].identifier",
+            "identifiersList[].otherIdentificationType"
+          ]
+        }
+      ]
+    }
+  ]
+}

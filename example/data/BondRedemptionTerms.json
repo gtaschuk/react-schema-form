@@ -1,0 +1,171 @@
+{
+  "path": "/redemptionTerms",
+  "schema": {
+    "type": "object",
+    "title": "Redemption Terms",
+    "properties": {
+      "redemptionTermsList": {
+        "title": "Redemption Terms",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "businessDayConvention": {
+              "title": "Business Day Convention",
+              "type": "string",
+              "enum": [
+                null,
+                "Floating Rate Convention",
+                "Following",
+                "Modified Following",
+                "Nearest",
+                "No Adjustment",
+                "Preceding"
+              ]
+            },
+            "calendar": {
+              "title": "Calendar",
+              "type": "string"
+            },
+            "callCondition": {
+              "title": "Call Condition",
+              "type": "string",
+              "enum": [
+                null,
+                "Asset Sales",
+                "Change of Control",
+                "Clean-up Call",
+                "Coincident with Extension Dates",
+                "Convertible - Soft Call",
+                "Covenant Violation",
+                "Decline in Earnings",
+                "Destruction of Equipment",
+                "Drop in Receivables",
+                "Equity Call",
+                "Gaming Law Violation",
+                "Ratings Change",
+                "Tax Law Change"
+              ]
+            },
+            "callDate": {
+              "title": "Call Date",
+              "type": "date"
+            },
+            "callPrice": {
+              "title": "Call Price",
+              "type": "integer"
+            },
+            "callRestrictionType": {
+              "title": "Call Restriction",
+              "type": "string",
+              "enum": [
+                null,
+                "Partial",
+                "Partial - Pro Rata",
+                "Unknown",
+                "Whole",
+                "Whole or Partial"
+              ]
+            },
+            "conditional": {
+              "title": "Is Conditional",
+              "type": "boolean"
+            },
+            "makeWhole": {
+              "title": "Is Make Whole Call",
+              "type": "boolean"
+            },
+            "makeWholeBenchmark": {
+              "title": "Make Whole Benchmark",
+              "type": "string"
+            },
+            "makeWholeFormula": {
+              "title": "Make Whole Formula",
+              "type": "string"
+            },
+            "makeWholeSpread": {
+              "title": "Make Whole Spread",
+              "type": "integer"
+            },
+            "maximumNoticeDays": {
+              "title": "Maximum Days Notice",
+              "type": "integer"
+            },
+            "minimumNoticeDays": {
+              "title": "Minimum Days Notice",
+              "type": "integer"
+            },
+            "optionDescription": {
+              "title": "Description",
+              "type": "string"
+            },
+            "optionStyle": {
+              "title": "Option Style",
+              "type": "string",
+              "enum": [
+                null,
+                "AMER",
+                "ASIA",
+                "BERM",
+                "CANA",
+                "EURO"
+              ]
+            },
+            "optionType": {
+              "title": "Option Type",
+              "type": "string",
+              "enum": [
+                null,
+                "Call",
+                "Other",
+                "Put"
+              ]
+            },
+            "periodEnd": {
+              "title": "Period End",
+              "type": "date"
+            },
+            "periodStart": {
+              "title": "Period Start",
+              "type": "date"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "fieldset",
+      "items": [
+        {
+          "key": "redemptionTermsList",
+          "add": "New Redemption Provision",
+          "style": {
+            "add": "redemptionTermsList"
+          },
+          "items": [
+            "redemptionTermsList[].periodStart",
+            "redemptionTermsList[].periodEnd",
+            "redemptionTermsList[].optionType",
+            "redemptionTermsList[].optionStyle",
+            "redemptionTermsList[].optionDescription",
+            "redemptionTermsList[].callRestrictionType",
+            "redemptionTermsList[].callDate",
+            "redemptionTermsList[].callPrice",
+            "redemptionTermsList[].makeWhole",
+            "redemptionTermsList[].makeWholeBenchmark",
+            "redemptionTermsList[].makeWholeSpread",
+            "redemptionTermsList[].makeWholeFormula",
+            "redemptionTermsList[].conditional",
+            "redemptionTermsList[].callCondition",
+            "redemptionTermsList[].maximumNoticeDays",
+            "redemptionTermsList[].minimumNoticeDays",
+            "redemptionTermsList[].businessDayConvention",
+            "redemptionTermsList[].calendar"
+          ]
+        }
+      ]
+    }
+  ]
+}

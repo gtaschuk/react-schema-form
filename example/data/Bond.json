@@ -1,0 +1,49 @@
+{
+  "path": "/",
+  "schema": {
+    "type": "object",
+    "title": "Corporate Bond Description",
+    "properties": {
+      "comments": {
+        "title": "Comments",
+        "type": "string"
+      },
+      "couponStructure": {
+        "title": "Coupon Structure",
+        "type": "string",
+        "enum": [
+          null,
+          "Fixed Rate",
+          "Floating Rate",
+          "Stepped Rate",
+          "Variable Rate",
+          "Zero Coupon"
+        ]
+      },
+      "denominationCurrency": {
+        "title": "Denomination Currency",
+        "type": "string"
+      },
+      "issuerName": {
+        "title": "Issuer Name",
+        "type": "string"
+      },
+      "maturityDate": {
+        "title": "Maturity Date",
+        "type": "date"
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "fieldset",
+      "items": [
+        "issuerName",
+        "couponStructure",
+        "maturityDate",
+        "denominationCurrency",
+        "comments"
+      ]
+    }
+  ]
+}
