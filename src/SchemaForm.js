@@ -98,4 +98,10 @@ class SchemaForm extends Component {
     }
 }
 
-module.exports = SchemaForm
+SchemaForm.defaultProps = {
+    classes: {
+        root: '',
+    },
+}
+
+export default SchemaForm

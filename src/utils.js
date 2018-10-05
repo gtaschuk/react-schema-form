@@ -500,7 +500,7 @@ function merge(schema, form, ignore, options, readonly) {
     }))
 }
 
-function selectOrSet(key, model = {}, valueToSet, type) {
+function selectOrSet(key, model = {}, valueToSet) {
     // string object path in array syntax (i.e., "object.prop1[3].propX")
     let parts = typeof key === 'string' ? ObjectPath.parse(key) : key
 
@@ -516,13 +516,6 @@ function selectOrSet(key, model = {}, valueToSet, type) {
         model[parts[0]] = parts.length > 2 && numRe.test(parts[1]) ? [] : {}
     }
 
-    if (typeof type !== 'undefined' && typeof valueToSet === 'undefined') {
-        if (['number', 'integer'].indexOf(type) > -1) {
-            model[parts[0]] = ''
-            return model
-        }
-    }
-
     let value = model[parts[0]]
     for (let i = 1; i < parts.length; i++) {
         // Special case: We allow JSON Form syntax for arrays using empty brackets
@@ -532,21 +525,22 @@ function selectOrSet(key, model = {}, valueToSet, type) {
         }
         if (typeof valueToSet !== 'undefined') {
             if (i === parts.length - 1) {
-                //last step. Let's set the value
+                // last step. Let's set the value
                 value[parts[i]] = valueToSet
                 return valueToSet
             } else {
                 // Make sure to create new objects on the way if they are not there.
                 // We need to look ahead to check if array is appropriate
-                let tmp = value[parts[i]]
+                let tmp = value[parts[i]] // value should be an array here
                 if (typeof tmp === 'undefined' || tmp === null) {
+                    // test if the next element in the path is an array index
                     tmp = numRe.test(parts[i + 1]) ? [] : {}
                     value[parts[i]] = tmp
                 }
                 value = tmp
             }
         } else if (value) {
-            //Just get nex value.
+            // progress through the object path
             value = value[parts[i]]
         }
     }
