@@ -1,5 +1,5 @@
-const React = require('react');
-const SchemaForm = require('../SchemaForm');
+import React from 'react'
+import {SchemaForm} from "../index"
 import { render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import utils from '../utils';
@@ -66,15 +66,14 @@ describe('Composed component test', () => {
                 ]
             }
         };
-        
-        let display = render(<SchemaForm 
+
+        let display = render(<SchemaForm
             form={cfg.form}
             schema={cfg.schema}
             model={cfg.model}
             onModelChange={onModelChange}
         />);
-    
+
         expect(display.find('input').length).toEqual(3);
     });
 });
-  

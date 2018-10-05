@@ -21,18 +21,6 @@ class ExamplePage extends React.Component {
 
     state = {
         tests: [
-            {label: 'Bond', value: 'data/Bond.json'},
-            {label: 'BondAttributes', value: 'data/BondAttributes.json'},
-            {label: 'BondCurrentCoupon', value: 'data/BondCurrentCoupon.json'},
-            {label: 'BondIdentifiers', value: 'data/BondIdentifiers.json'},
-            {label: 'BondInterestTerms', value: 'data/BondInterestTerms.json'},
-            {label: 'BondIssuerDetails', value: 'data/BondIssuerDetails.json'},
-            {label: 'BondOfferDetails', value: 'data/BondOfferDetails.json'},
-            {label: 'BondRedemptionTerms', value: 'data/BondRedemptionTerms.json'},
-            {label: 'Token', value: 'data/Token.json'},
-            {label: 'TokenListing', value: 'data/TokenListing.json'},
-            {label: 'TokenProject', value: 'data/TokenProject.json'},
-            {label: 'TokenProjectLegalEntities', value: 'data/TokenProjectLegalEntities.json'},
             {label: 'Triple Boolean', value: 'data/noanswer.json'},
             {label: 'Simple Array', value: 'data/simplearray.json'},
             {label: 'Basic JSON Schema Type', value: 'data/types.json'},
