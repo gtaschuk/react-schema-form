@@ -8,6 +8,10 @@ import ComposedComponent from './ComposedComponent'
 
 
 const styles = theme => ({
+    arrayContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
     arrayItem: {
         position: 'relative',
         paddingTop: `16px`,
@@ -150,7 +154,9 @@ class Array extends Component {
             <Fragment>
                 <div>
                     <label>{this.props.form.title}</label>
-                    <div>{arrays}</div>
+                    <div className={classes.arrayContainer}>
+                        {arrays}
+                    </div>
                 </div>
                 <Button classes={{root: classes.addButton}} variant="contained" color="primary" onClick={this.onAppend}>
                     {this.props.form.add || 'Add'}
