@@ -21,10 +21,6 @@ class ExamplePage extends React.Component {
 
     state = {
         tests: [
-            {label: 'Token', value: 'data/Token.json'},
-            {label: 'TokenListing', value: 'data/TokenListing.json'},
-            {label: 'TokenProject', value: 'data/TokenProject.json'},
-            {label: 'TokenProjectLegalEntities', value: 'data/TokenProjectLegalEntities.json'},
             {label: 'Triple Boolean', value: 'data/noanswer.json'},
             {label: 'Simple Array', value: 'data/simplearray.json'},
             {label: 'Basic JSON Schema Type', value: 'data/types.json'},

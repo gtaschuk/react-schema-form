@@ -40,16 +40,6 @@ class Array extends Component {
         return item
     }
 
-    constructor(props) {
-        super(props)
-        // we have the model here for the entire form, get the model for this array only
-        // and add to the state. if is empty, add an entry by calling onAppend directly.
-        this.state = {
-            model: utils.selectOrSet(this.props.form.key, this.props.model) || []
-        }
-        //console.log('constructor', this.props.form.key, this.props.model, this.state.model);
-    }
-
     static getDerivedStateFromProps(props, state) {
         let propsKey = props.form.key
         if (props.form && propsKey === state.formKey && props.model &&
@@ -63,6 +53,11 @@ class Array extends Component {
         }
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
     componentDidMount() {
         // Always start with one empty form unless configured otherwise.
         if (this.props.form.startEmpty !== true && this.state.model.length === 0) {
@@ -71,7 +66,6 @@ class Array extends Component {
     }
 
     onAppend = () => {
-        //console.log('onAppend is called this.state.model', this.state.model);
         let empty
         if (this.props.form && this.props.form.schema && this.props.form.schema.items) {
             let items = this.props.form.schema.items
@@ -111,7 +105,6 @@ class Array extends Component {
         newModel.push(empty)
         this.setState({model: newModel})
         this.props.onChangeValidate(this.state.model)
-        //console.log('After append this.state.model', newModel);
     }
 
     onDelete = index => () => {
@@ -136,7 +129,6 @@ class Array extends Component {
     }
 
     render() {
-        //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
         let {classes, form} = this.props
         let arrays = []
         let model = this.state.model

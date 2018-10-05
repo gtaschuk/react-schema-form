@@ -1,12 +1,12 @@
-var React = require('react');
-var ShallowRenderer = require('react-test-renderer/shallow');
-var SchemaForm = require('../SchemaForm');
+import React from 'react'
+import {SchemaForm} from '../index'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 describe('SchemaForm test', function() {
 
   it('shows SchemaForm', function() {
     const shallowRenderer = new ShallowRenderer();
-    var cfg = {
+    let cfg = {
       form: {},
       schema: {
         'type': 'object'
@@ -18,7 +18,7 @@ describe('SchemaForm test', function() {
       schema={cfg.schema}
       mapper={cfg.mapper}
     />);
-    var result = shallowRenderer.getRenderOutput();
+    let result = shallowRenderer.getRenderOutput();
     expect(result.type).toEqual('div');
     expect(result.props.children).toEqual([]);
   });
