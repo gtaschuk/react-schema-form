@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@material-ui/core": ">1.5.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "react": "^16.4.2",
     "react-ace": "^6.1.4",
     "react-dom": "^16.4.2",
